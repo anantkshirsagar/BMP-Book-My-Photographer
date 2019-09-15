@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Registration</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+		<script src="lib/angjs.js"></script>
+		<div ng-include="'commons/load-libs.html'"></div>
+	</head>
+	<body ng-app="">
+		<div class="jumbotron">
+			<div class="container">
+				<div class="w3-card-4">
+					<div class="w3-container w3-green">
+						<h2>Registration</h2>
+					</div>
+					<div class="w3-container">
+						<br>
+						<form>
+							<div class="row">
+								<div class="col-md-6">		
+									<label>Name</label> <input class="w3-input" type="text" name="name">
+								</div>
+								<div class="col-md-6">
+									<label>Registration Type</label>
+									<br>
+									<div class="row">
+										<div class="col-md-6">
+											<input class="w3-radio" type="radio" name="type" value="user" checked>
+											<label>User</label>
+										</div>
+										<div class="col-md-6">
+											<input class="w3-radio" type="radio" name="type" value="photographer">
+											<label>Photographer</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<br> 
+							<div class="row">
+								<div class="col-md-6">
+									<label>E-mail</label> <input class="w3-input" type="email" name="email">
+								</div>
+								<div class="col-md-6">		
+									<label>Password</label> <input class="w3-input" type="password" name="password">
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-6">
+									<label>Mobile No</label> <input class="w3-input" type="number" name="mobileNo">
+								</div>
+							</div>
+							<br> <br>
+							<button type="button" class="w3-button w3-blue w3-large" onclick="sendData(this)">Register</button>
+							<button type="reset" class="w3-button w3-black w3-large">Clear</button>
+							<br> <br> <br>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+		function sendData(){
+			var formdata = $("form").serializeArray();
+			var dataToSend = {};
+			$(formdata).each(function(index, obj){
+				dataToSend[obj.name] = obj.value;
+			});
+			console.log(dataToSend);
+			$.ajax({
+				  type: "POST",
+				  url: "/book-my-photographer/LoginServlet",
+				  data: JSON.stringify(dataToSend),
+				  contentType: "application/json"
+			})
+			.success(function(resp){
+				console.log("Success: " +resp);
+			})
+			.error(function(resp){
+				console.log("Error: " +resp);
+			});
+		}
+		</script>
+	</body>	
+</html>
