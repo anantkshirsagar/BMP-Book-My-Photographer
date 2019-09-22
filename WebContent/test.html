@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Registration</title>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+		<meta charset="ISO-8859-1">
+		<title>Test Page</title>
+		<script src="lib/jquery-1.7.1.js" type="text/javascript"></script>
 		<script src="lib/angjs.js"></script>
 		<div ng-include="'commons/load-libs.html'"></div>
 	</head>
+	
 	<body ng-app="">
 		<div class="jumbotron">
 			<div class="container">
@@ -58,43 +60,80 @@
 					</div>
 				</div>
 			</div>
-			
-			<div>
-				<center><h5>Following content is use only for testing purpose</h5></center>
-				<div>
-					<p id="firstName">{{firstName}} {{lastName}}</p>
-				</div>
-			</div>
+		</div>
+		
+		<!-- <div>
+			<table id="authorId">
+				<tr>
+					<td id="bookId">{{bookName}}</td>
+				</tr>
+				
+				<tr w3-repeat="authors">
+					<td>{{author}}</td>
+				</tr>
+			</table>
+		</div> -->
+		
+		<!-- <div id="myDiv">
+			<p>{{firstName}}</p>
+			<p>{{lastName}}</p>
+			<p>{{className}}</p>
+			<p>{{grade}}</p>
+		</div>
+		 -->
+		<div>
+			<p id="respDiv">{{name}}</p>
+			<p>{{email}}</p>
+			<p>{{password}}</p>
+			<p>{{type}}</p>
+			<p>{{mobileNo}}</p>
 		</div>
 		
 		<script src="lib/w3-lib.js"></script>
 		<script>
-		var myObject = {
-			"firstName" : "Anant",
-			"lastName" : "Kshirsagar"
-		}
-		w3.displayObject("firstName", myObject);
-		
-		function sendData(){
-			var formdata = $("form").serializeArray();
-			var dataToSend = {};
-			$(formdata).each(function(index, obj){
-				dataToSend[obj.name] = obj.value;
-			});
-			console.log(dataToSend);
-			$.ajax({
-				  type: "POST",
-				  url: "/book-my-photographer/LoginServlet",
-				  data: JSON.stringify(dataToSend),
-				  contentType: "application/json"
-			})
-			.success(function(resp){
-				console.log(resp);
-			})
-			.error(function(resp){
-				console.log("Error: " +resp);
-			});
-		}
+			var student = {
+				"firstName" : "Anant",
+				"lastName" : "Kshirsagar",
+				"className" : "M.Sc. Comp Sci.",
+				"grade" : "O"
+			}
+			
+			var myObject = {
+				"bookName" : "Java",
+				"authors" : [
+					{"author" : "Nageshwara Rao"},
+					{"author" : "James Gosling"}
+				]
+			}
+			//w3.displayObject("bookId", myObject);
+			//w3.displayObject("authorId", myObject);
+			//w3.displayObject("myDiv", student);
+			
+			function sendData(){
+				var formdata = $("form").serializeArray();
+				var dataToSend = {};
+				$(formdata).each(function(index, obj){
+					dataToSend[obj.name] = obj.value;
+				});
+				
+				console.log(dataToSend);
+				$.ajax({
+					  type: "POST",
+					  url: "/book-my-photographer/LoginServlet",
+					  data: JSON.stringify(dataToSend),
+					  contentType: "application/json"
+				})
+				.success(function(resp){
+					console.log(resp);
+					callBack(resp);
+				})
+				.error(function(resp){
+					console.log("Error: " +resp);
+				});
+			}
+			function callBack(resp){
+				w3.displayObject("respDiv", resp);
+			}
 		</script>
-	</body>	
+	</body>
 </html>
