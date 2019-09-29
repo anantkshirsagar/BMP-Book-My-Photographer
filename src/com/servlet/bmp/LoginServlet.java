@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.tables.User;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -33,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		Gson gson = new Gson();
 		User user1 = new User();
-		user1.setId(101);
+		// user1.setId(101);
 		user1.setName("Pranav Joshi");
 		System.out.println("forwarding to jsp");
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("test.jsp");

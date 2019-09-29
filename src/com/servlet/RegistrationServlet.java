@@ -39,5 +39,6 @@ public class RegistrationServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		response.sendRedirect(request.getContextPath() + "/login.html");
 	}
 }
