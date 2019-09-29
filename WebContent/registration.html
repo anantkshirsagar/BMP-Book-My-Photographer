@@ -15,7 +15,7 @@
 					</div>
 					<div class="w3-container">
 						<br>
-						<form>
+						<form action="RegistrationServlet" method="post">
 							<div class="row">
 								<div class="col-md-6">		
 									<label>Name</label> <input class="w3-input" type="text" name="name">
@@ -40,18 +40,22 @@
 								<div class="col-md-6">
 									<label>E-mail</label> <input class="w3-input" type="email" name="email">
 								</div>
-								<div class="col-md-6">		
-									<label>Password</label> <input class="w3-input" type="password" name="password">
-								</div>
-							</div>
-							<br>
-							<div class="row">
 								<div class="col-md-6">
 									<label>Mobile No</label> <input class="w3-input" type="number" name="mobileNo">
 								</div>
 							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-6">		
+									<label>Password</label> <input class="w3-input" type="password" name="password">
+								</div>
+								<div class="col-md-6">		
+									<label>Confirm Password</label> <input class="w3-input" type="password" name="password">
+								</div>
+							</div>
 							<br> <br>
-							<button type="button" class="w3-button w3-blue w3-large" onclick="sendData(this)">Register</button>
+							<!-- <button type="submit" class="w3-button w3-blue w3-large" onclick="sendData(this)">Register</button> -->
+							<button type="submit" class="w3-button w3-blue w3-large">Register</button>
 							<button type="reset" class="w3-button w3-black w3-large">Clear</button>
 							<br> <br> <br>
 						</form>
@@ -59,16 +63,16 @@
 				</div>
 			</div>
 			
-			<div>
+			<!-- <div>
 				<center><h5>Following content is use only for testing purpose</h5></center>
 				<div>
 					<p id="firstName">{{firstName}} {{lastName}}</p>
 				</div>
-			</div>
+			</div> -->
 		</div>
 		
 		<script src="lib/w3-lib.js"></script>
-		<script>
+		<!-- <script>
 		var myObject = {
 			"firstName" : "Anant",
 			"lastName" : "Kshirsagar"
@@ -95,6 +99,6 @@
 				console.log("Error: " +resp);
 			});
 		}
-		</script>
+		</script> -->
 	</body>	
 </html>
