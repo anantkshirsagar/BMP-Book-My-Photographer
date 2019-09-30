@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bmp.utils.Constants;
+import com.bmp.utils.Constants.UserType;
 import com.services.LoginService;
 import com.tables.User;
 
@@ -22,14 +23,20 @@ public class LoginServlet extends HttpServlet {
 		String loginType = request.getParameter("type");
 		String forwordPageURL = "";
 		LoginService loginService = new LoginService();
+		// System.out.println("email " + email + " password " + password);
 		User user = null;
 		try {
-			if (Constants.PHOTOGRAPHER.equals(loginType)) {
-				user = loginService.getUserById(Constants.PHOTOGRAPHER, email);
+			if (UserType.PHOTOGRAPHER.toString().equals(loginType)) {
+				user = loginService.getUserById(UserType.PHOTOGRAPHER.toString(), email);
 				forwordPageURL = "photographer-home.jsp";
-			} else if (Constants.CUSTOMER.equals(loginType)) {
-				user = loginService.getUserById(Constants.CUSTOMER, email);
+			} else if (UserType.CUSTOMER.toString().equals(loginType)) {
+				user = loginService.getUserById(UserType.CUSTOMER.toString(), email);
 				forwordPageURL = "customer-home.jsp";
+			} else if (UserType.ADMIN.toString().equals(loginType)) {
+				if (Constants.ADMIN_USERNAME.equals(email) && Constants.ADMIN_PASSWORD.equals(password)) {
+					forwordPageURL = "admin-home.jsp";
+					response.sendRedirect(request.getContextPath() + "/" + forwordPageURL);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

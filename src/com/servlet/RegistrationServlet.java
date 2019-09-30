@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.bmp.utils.Constants;
+import com.bmp.utils.Constants.UserType;
 import com.services.RegistrationService;
 import com.tables.User;
 
@@ -29,12 +29,12 @@ public class RegistrationServlet extends HttpServlet {
 		String registrationType = request.getParameter("type");
 		RegistrationService registrationService = new RegistrationService();
 		try {
-			if (Constants.PHOTOGRAPHER.equals(registrationType)) {
+			if (UserType.PHOTOGRAPHER.toString().equals(registrationType)) {
 				LOG.debug("Creating Photographer {}", user);
-				registrationService.insertUser(Constants.PHOTOGRAPHER, user);
-			} else if (Constants.CUSTOMER.equals(registrationType)) {
+				registrationService.insertUser(UserType.PHOTOGRAPHER.toString(), user);
+			} else if (UserType.CUSTOMER.toString().equals(registrationType)) {
 				LOG.debug("Creating Customer {}", user);
-				registrationService.insertUser(Constants.CUSTOMER, user);
+				registrationService.insertUser(UserType.CUSTOMER.toString(), user);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -14,7 +14,7 @@ public class LoginService {
 	public User getUserById(String tableName, String email) throws IOException, ClassNotFoundException, SQLException {
 		AbstractConnectionSettings connectionSettings = ConnetionUtils.getConnectionSettings();
 		connectionSettings.build();
-		String query = "select * from " + tableName + " where email='" + email + "'";
+		String query = "select * from " + tableName.toLowerCase() + " where email='" + email + "'";
 		PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query);
 		ResultSet resultSet = prepareStatement.executeQuery();
 		User user = new User();

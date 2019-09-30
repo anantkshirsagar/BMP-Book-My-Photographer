@@ -18,20 +18,21 @@
 							<form action="LoginServlet" method="post">
 								<label>Type</label> <br>
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<input class="w3-radio" type="radio" name="type"
-											value="customer" checked> <label>Customer</label>
+											value="CUSTOMER" checked> <label>Customer</label>
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<input class="w3-radio" type="radio" name="type"
-											value="photographer"> <label>Photographer</label>
+											value="PHOTOGRAPHER"> <label>Photographer</label>
+									</div>
+									<div class="col-md-4">
+										<input class="w3-radio" type="radio" name="type" value="ADMIN">
+										<label>Admin</label>
 									</div>
 								</div>
-								<br> 
-								<label>Email Id</label> 
-								<input class="w3-input" type="text" name="email">
-								<br> 
-								<label>Password</label> 
+								<br> <label>Email Id</label> <input class="w3-input"
+									type="text" name="email"> <br> <label>Password</label>
 								<input class="w3-input" type="password" name="password">
 								<br> <br>
 								<button type="submit" class="w3-button w3-green">Login</button>
