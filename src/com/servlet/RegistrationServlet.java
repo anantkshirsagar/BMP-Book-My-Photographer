@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.bmp.utils.Constants.UserType;
+import com.bmp.utils.AppConstants.UserType;
 import com.services.RegistrationService;
-import com.tables.User;
+import com.tables.Customer;
+import com.tables.Photographer;
 
 public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -21,23 +22,31 @@ public class RegistrationServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		User user = new User();
-		user.setName(request.getParameter("name"));
-		user.setEmail(request.getParameter("email"));
-		user.setPassword(request.getParameter("password"));
-		user.setMobileNo(Long.parseLong(request.getParameter("mobileNo")));
 		String registrationType = request.getParameter("type");
+		LOG.debug("registrationType {}", registrationType);
 		RegistrationService registrationService = new RegistrationService();
 		try {
-			if (UserType.PHOTOGRAPHER.toString().equals(registrationType)) {
-				LOG.debug("Creating Photographer {}", user);
-				registrationService.insertUser(UserType.PHOTOGRAPHER.toString(), user);
-			} else if (UserType.CUSTOMER.toString().equals(registrationType)) {
-				LOG.debug("Creating Customer {}", user);
-				registrationService.insertUser(UserType.CUSTOMER.toString(), user);
+			if (UserType.PHOTOGRAPHER.name().equals(registrationType)) {
+				Photographer photographer = new Photographer();
+				photographer.setName(request.getParameter("name"));
+				photographer.setEmail(request.getParameter("email"));
+				photographer.setPassword(request.getParameter("password"));
+				photographer.setMobileNo(Long.parseLong(request.getParameter("mobileNo")));
+				photographer.setApproved(false);
+				photographer.setSubmitted(false);
+				LOG.debug("Creating Photographer {}", photographer);
+				registrationService.insertPhotographer(photographer);
+			} else if (UserType.CUSTOMER.name().equals(registrationType)) {
+				Customer customer = new Customer();
+				customer.setName(request.getParameter("name"));
+				customer.setEmail(request.getParameter("email"));
+				customer.setPassword(request.getParameter("password"));
+				customer.setMobileNo(Long.parseLong(request.getParameter("mobileNo")));
+				LOG.debug("Creating Customer {}", customer);
+				registrationService.insertCustomer(customer);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error("Exception {}", e);
 		}
 		response.sendRedirect(request.getContextPath() + "/login.html");
 	}

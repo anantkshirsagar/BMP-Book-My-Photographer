@@ -1,6 +1,6 @@
 package com.bmp.utils;
 
-public interface Constants {
+public interface AppConstants {
 	public enum UserType {
 		PHOTOGRAPHER, CUSTOMER, ADMIN
 	}

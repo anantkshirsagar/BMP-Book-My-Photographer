@@ -3,18 +3,29 @@ package com.bmp.utils;
 import java.io.File;
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.dbmanager.connection.setting.AbstractConnectionSettings;
 import com.dbmanager.connection.setting.ConnectionSettings;
 import com.dbmanager.property.util.PropertyReader;
+import com.servlet.RegistrationServlet;
 
-public class ConnetionUtils {
+public class ConnectionUtils {
+
+	private static final Logger LOG = LoggerFactory.getLogger(RegistrationServlet.class);
+	private static final String PROPERTIES = "H:\\eclipse-nsg-workspace\\BMP-Book-My-Photographer\\src\\mysql.properties";
 	private static AbstractConnectionSettings connectionSettings;
-	private final static String PROPERTIES = "S:\\suyog\\NSG 2019\\BMP-Book-My-Photographer\\resources\\mysql.properties";
+
+	private ConnectionUtils() {
+	}
+
 	static {
 		try {
-			connectionSettings = new ConnectionSettings(new PropertyReader(new File(PROPERTIES)).propertiesReader());
+			PropertyReader propertyReader = new PropertyReader(new File(PROPERTIES));
+			connectionSettings = new ConnectionSettings(propertyReader.propertiesReader());
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.error("Exception {}", e);
 		}
 	}
 

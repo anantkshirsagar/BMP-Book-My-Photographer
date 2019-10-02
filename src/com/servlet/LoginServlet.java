@@ -8,12 +8,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bmp.utils.Constants;
-import com.bmp.utils.Constants.UserType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.bmp.utils.AppConstants;
+import com.bmp.utils.AppConstants.UserType;
 import com.services.LoginService;
-import com.tables.User;
 
 public class LoginServlet extends HttpServlet {
+	private static final Logger LOG = LoggerFactory.getLogger(LoginServlet.class);
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -24,25 +27,25 @@ public class LoginServlet extends HttpServlet {
 		String forwordPageURL = "";
 		LoginService loginService = new LoginService();
 		// System.out.println("email " + email + " password " + password);
-		User user = null;
+		boolean loginAllowFlag = false;
 		try {
-			if (UserType.PHOTOGRAPHER.toString().equals(loginType)) {
-				user = loginService.getUserById(UserType.PHOTOGRAPHER.toString(), email);
+			if (UserType.PHOTOGRAPHER.name().equals(loginType)) {
+				loginAllowFlag = loginService.isPhotographerLoginAllow(email, password);
 				forwordPageURL = "photographer-home.jsp";
-			} else if (UserType.CUSTOMER.toString().equals(loginType)) {
-				user = loginService.getUserById(UserType.CUSTOMER.toString(), email);
+			} else if (UserType.CUSTOMER.name().equals(loginType)) {
+				loginAllowFlag = loginService.isCustomerLoginAllow(email, password);
 				forwordPageURL = "customer-home.jsp";
-			} else if (UserType.ADMIN.toString().equals(loginType)) {
-				if (Constants.ADMIN_USERNAME.equals(email) && Constants.ADMIN_PASSWORD.equals(password)) {
+			} else if (UserType.ADMIN.name().equals(loginType)) {
+				if (AppConstants.ADMIN_USERNAME.equals(email) && AppConstants.ADMIN_PASSWORD.equals(password)) {
 					forwordPageURL = "admin-home.jsp";
-					response.sendRedirect(request.getContextPath() + "/" + forwordPageURL);
+					loginAllowFlag = true;
 				}
 			}
 		} catch (Exception e) {
+			LOG.error("Error {}", e);
 			e.printStackTrace();
 		}
-		if (user != null && user.getEmail() != null && user.getPassword() != null && email.equals(user.getEmail())
-				&& password.equals(user.getPassword())) {
+		if (loginAllowFlag) {
 			response.sendRedirect(request.getContextPath() + "/" + forwordPageURL);
 		} else {
 			PrintWriter out = response.getWriter();
