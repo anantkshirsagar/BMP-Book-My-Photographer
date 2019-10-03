@@ -28,4 +28,12 @@
 		<servlet-name>LoginServlet</servlet-name>
 		<url-pattern>/LoginServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>PhotographerRegistrationServlet</servlet-name>
+		<servlet-class>com.servlet.PhotographerRegistrationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PhotographerRegistrationServlet</servlet-name>
+		<url-pattern>/PhotographerRegistrationServlet</url-pattern>
+	</servlet-mapping>
 </web-app>

@@ -37,7 +37,7 @@ feedback varchar(255),
 user_id bigint references user on delete cascade on update cascade,   
 photographer_id bigint references photographer on delete cascade on update cascade);
 
-create table if not exists  order_request(
+create table if not exists photo(
 id bigint primary key  auto_increment,
 photo longblob,
 photographer_id bigint references photographer on delete cascade on update cascade);
