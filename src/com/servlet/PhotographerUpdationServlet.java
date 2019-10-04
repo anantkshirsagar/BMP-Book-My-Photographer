@@ -1,7 +1,6 @@
 package com.servlet;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
 import java.util.Collection;
 
 import javax.servlet.ServletException;
@@ -15,7 +14,7 @@ import com.bmp.utils.ConnectionUtils;
 import com.dbmanager.connection.setting.AbstractConnectionSettings;
 
 @MultipartConfig
-public class PhotographerRegistrationServlet extends HttpServlet {
+public class PhotographerUpdationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
