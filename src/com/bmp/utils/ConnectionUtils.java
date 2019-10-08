@@ -14,7 +14,7 @@ import com.servlet.RegistrationServlet;
 public class ConnectionUtils {
 
 	private static final Logger LOG = LoggerFactory.getLogger(RegistrationServlet.class);
-	private static final String PROPERTIES = "H:\\eclipse-nsg-workspace\\BMP-Book-My-Photographer\\src\\mysql.properties";
+	private static final String PROPERTIES = "S:\\suyog\\NSG 2019\\BMP-Book-My-Photographer\\src\\mysql.properties";
 	private static AbstractConnectionSettings connectionSettings;
 
 	private ConnectionUtils() {

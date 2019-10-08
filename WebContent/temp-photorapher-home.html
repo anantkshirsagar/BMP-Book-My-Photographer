@@ -16,7 +16,7 @@
 					</div>
 					<div class="w3-container">
 						<br>
-						<form action="PhotographerRegistrationServlet" method="post" enctype="multipart/form-data">
+						<form action="PhotographerUpdationServlet" method="post" enctype="multipart/form-data">
 							<label>Camera Type  </label>
 							<input class="w3-check" type="checkbox" name="cameraType">
 							<label>Full Frame</label>
@@ -27,7 +27,8 @@
 							<label>Category</label>
 							<input class="w3-input" type="text" name="category">
 							<br> <br>
-							<input type="file" id="files" multiple="multiple">
+							<input type="file" id="files" name="filename" multiple>
+							<!-- <input type="file" name="filename" value="Upload File"  multiple> --> 
 							<br> <br>
 							<button type="submit" class="w3-button w3-blue w3-large">Register</button>
 							<button type="reset" class="w3-button w3-black w3-large">Clear</button>

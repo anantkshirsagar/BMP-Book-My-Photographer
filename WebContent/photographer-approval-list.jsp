@@ -1,0 +1,55 @@
+<%@page import="com.services.AdminService"%>
+<%@page import="java.util.List"%>
+<%@page import="com.tables.Photographer"%>
+<%@ page language="java"%>
+<html>
+<head>
+<title>Approval List</title>
+<script src="lib/angjs.js"></script>
+<div ng-include="'commons/load-libs.html'"></div>
+</head>
+<body ng-app="">
+	<div class="jumbotron">
+		<div class="container">
+			<div class="w3-responsive">
+				<table class="w3-table-all">
+					<thead>
+						<tr class="w3-green">
+							<th>Id</th>
+							<th>Name</th>
+							<th>E-mail</th>
+							<th>City</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+							List<Photographer> photographerList = new AdminService().getPhotographerApprovalList();
+							for (Photographer photographer : photographerList) {
+						%>
+						<tr>
+							<td><%=photographer.getId()%></td>
+							<td><%=photographer.getName()%></td>
+							<td><%=photographer.getEmail()%></td>
+							<td><%=photographer.getCity() != null ? photographer.getCity() : ""%></td>
+							<td><button type="button"
+									onclick="viewProfile(<%=photographer.getId()%>)">View
+									Profile</button></td>
+						</tr>
+						<%
+							}
+						%>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function viewProfile(id) {
+		  	var xhr = new XMLHttpRequest();
+		    xhr.open('POST', "ViewProfile?id="+id, true);
+		    xhr.send();
+		}
+	</script>
+</body>
+</html>
