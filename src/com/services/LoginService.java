@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.bmp.utils.ConnectionUtils;
 import com.dbmanager.connection.setting.AbstractConnectionSettings;
+import com.tables.Photographer;
 
 public class LoginService {
 	private static final Logger LOG = LoggerFactory.getLogger(LoginService.class);
@@ -51,5 +52,29 @@ public class LoginService {
 		connectionSettings.closeConnection();
 		LOG.debug("Email :" + email + " Login Allow : " + loginFlag);
 		return loginFlag;
+	}
+
+	public Photographer getPhotographerByEmailId(String email)
+			throws IOException, ClassNotFoundException, SQLException {
+		connectionSettings.build();
+		String query = "select * from photographer where email='" + email + "'";
+		PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query);
+		ResultSet resultSet = prepareStatement.executeQuery();
+		Photographer photographer = null;
+		if (resultSet.next()) {
+			photographer = new Photographer();
+			photographer.setId(resultSet.getLong("id"));
+			photographer.setName(resultSet.getString("name"));
+			photographer.setEmail(resultSet.getString("email"));
+			photographer.setMobileNo(resultSet.getLong("mobile_No"));
+			photographer.setCity(resultSet.getString("city"));
+			photographer.setCameraType(resultSet.getString("camera_type"));
+			photographer.setCategory(resultSet.getString("category"));
+			photographer.setApproved(resultSet.getBoolean("is_approved"));
+			photographer.setSubmitted(resultSet.getBoolean("is_submitted"));
+		}
+		connectionSettings.closeConnection();
+		LOG.debug("Email :" + email + " Approved : " + photographer.isApproved());
+		return photographer;
 	}
 }

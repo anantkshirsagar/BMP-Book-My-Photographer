@@ -25,11 +25,7 @@
 			%>
 			<tr>
 				<td><%=file.getFileName()%></td>
-				<td><img id="profileImage"
-					src="data:image/jpg;base64,<%Base64.getEncoder().encode(file.getBytes());%> ">
-			</tr>
-			<tr>
-				<img src="images/<%=file.getFileName()%>">
+				<td><img src="images/<%=file.getFileName()%>">
 			</tr>
 			<%
 				}
