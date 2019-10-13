@@ -5,6 +5,10 @@ public interface AppConstants {
 		PHOTOGRAPHER, CUSTOMER, ADMIN
 	}
 
+	public enum PhotographerStatus {
+		NOT_SUBMITTED, SUBMITTED, APPROVED, REJECTED
+	}
+
 	String ADMIN_USERNAME = "admin";
 	String ADMIN_PASSWORD = "123456";
 }

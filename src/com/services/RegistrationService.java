@@ -13,7 +13,7 @@ import com.tables.Customer;
 import com.tables.Photographer;
 
 public class RegistrationService {
-	
+
 	private static final Logger LOG = LoggerFactory.getLogger(RegistrationService.class);
 	private AbstractConnectionSettings connectionSettings;
 
@@ -23,14 +23,13 @@ public class RegistrationService {
 
 	public void insertPhotographer(Photographer photographer) throws ClassNotFoundException, SQLException {
 		connectionSettings.build();
-		String query = "insert into photographer(name,email,password,mobile_no,is_approved,is_submitted) values (?,?,?,?,?,?)";
+		String query = "insert into photographer(name,email,password,mobile_no,status) values (?,?,?,?,?)";
 		PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query);
 		prepareStatement.setString(1, photographer.getName());
 		prepareStatement.setString(2, photographer.getEmail());
 		prepareStatement.setString(3, photographer.getPassword());
 		prepareStatement.setLong(4, photographer.getMobileNo());
-		prepareStatement.setBoolean(5, false);
-		prepareStatement.setBoolean(6, false);
+		prepareStatement.setString(5, photographer.getStatus());
 		prepareStatement.executeUpdate();
 		LOG.debug("Photographer inserted");
 		connectionSettings.closeConnection();

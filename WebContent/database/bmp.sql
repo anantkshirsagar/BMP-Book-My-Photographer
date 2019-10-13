@@ -8,11 +8,18 @@ email varchar(255),
 password varchar(255),
 mobile_no bigint,
 camera_type varchar(255),
-is_approved boolean,
-is_submitted boolean,
+status varchar(255),
 category varchar(255));
 drop table photographer;
 select * from photographer;
+
+create table if not exists  photo(
+id bigint primary key auto_increment,
+photo_name varchar(255),
+photo longblob,
+photographer_id bigint references photographer on delete cascade on update cascade);
+drop table photo;
+select * from photo;
 
 create table if not exists customer(
 id bigint primary key auto_increment,
@@ -40,11 +47,3 @@ id bigint primary key auto_increment,
 feedback varchar(255),
 user_id bigint references user on delete cascade on update cascade,   
 photographer_id bigint references photographer on delete cascade on update cascade);
-
-create table if not exists  photo(
-id bigint primary key auto_increment,
-photo_name varchar(255),
-photo longblob,
-photographer_id bigint references photographer on delete cascade on update cascade);
-drop table photo;
-select * from photo;

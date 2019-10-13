@@ -1,3 +1,4 @@
+<%@page import="com.bmp.utils.AppConstants.PhotographerStatus"%>
 <%@page import="com.services.AdminService"%>
 <%@page import="java.util.List"%>
 <%@page import="com.tables.Photographer"%>
@@ -5,8 +6,12 @@
 <html>
 <head>
 <title>Approval List</title>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+	type="text/javascript"></script>
 <script src="lib/angjs.js"></script>
 <div ng-include="'commons/load-libs.html'"></div>
+<div ng-include="'commons/admin-nav-bar.html'"></div>
 </head>
 <body ng-app="">
 	<div class="jumbotron">
@@ -24,7 +29,8 @@
 					</thead>
 					<tbody>
 						<%
-							List<Photographer> photographerList = new AdminService().getPhotographerApprovalList();
+							List<Photographer> photographerList = new AdminService()
+									.getPhotographerListByStatus(PhotographerStatus.SUBMITTED.name());
 							for (Photographer photographer : photographerList) {
 						%>
 						<tr>
@@ -32,9 +38,11 @@
 							<td><%=photographer.getName()%></td>
 							<td><%=photographer.getEmail()%></td>
 							<td><%=photographer.getCity() != null ? photographer.getCity() : ""%></td>
-							<td><button type="button"
+							<%-- <td><button type="button"
 									onclick="viewProfile(<%=photographer.getId()%>)">View
-									Profile</button></td>
+									Profile</button></td> --%>
+							<td><a href="admin-view-photographer-profile.jsp?id=<%=photographer.getId()%>">View
+									Profile</a></td>
 						</tr>
 						<%
 							}
@@ -46,9 +54,9 @@
 	</div>
 	<script type="text/javascript">
 		function viewProfile(id) {
-		  	var xhr = new XMLHttpRequest();
-		    xhr.open('POST', "ViewProfile?id="+id, true);
-		    xhr.send();
+			/* var xhr = new XMLHttpRequest();
+			xhr.open('POST', "ViewProfile?id="+id, true);
+			xhr.send(); */
 		}
 	</script>
 </body>

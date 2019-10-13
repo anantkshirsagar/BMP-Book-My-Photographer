@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.bmp.utils.AppConstants;
+import com.bmp.utils.AppConstants.PhotographerStatus;
 import com.bmp.utils.AppConstants.UserType;
 import com.services.LoginService;
 import com.tables.Photographer;
@@ -32,15 +33,16 @@ public class LoginServlet extends HttpServlet {
 		LoginService loginService = new LoginService();
 		HttpSession session = request.getSession();
 		// System.out.println("email " + email + " password " + password);
-		boolean loginAllowFlag = false;
+		boolean loginAllowFlag = false, submittedFlag = false;
 		try {
 			if (UserType.PHOTOGRAPHER.name().equals(loginType)) {
 				loginAllowFlag = loginService.isPhotographerLoginAllow(email, password);
 				if (loginAllowFlag) {
 					Photographer photographer = loginService.getPhotographerByEmailId(email);
-					if (photographer.isApproved()) {
+					if (PhotographerStatus.APPROVED.name().equals(photographer.getStatus())) {
 						forwordPageURL = "photographer-home.jsp";
-					} else if (photographer.isSubmitted()) {
+					} else if (PhotographerStatus.SUBMITTED.name().equals(photographer.getStatus())) {
+						submittedFlag = true;
 						out.println(
 								"<center><h2 style=color:red> Your Application is not verified yet !!</h2></center>");
 						out.println("<center>Please try again after some time.</center>");
@@ -65,7 +67,7 @@ public class LoginServlet extends HttpServlet {
 		if (loginAllowFlag && forwordPageURL != null) {
 			session.setAttribute("email", email);
 			response.sendRedirect(request.getContextPath() + "/" + forwordPageURL);
-		} else {
+		} else if (!submittedFlag) {
 			out.println("<center><h2 style=color:red> Invalid Username or Password !!</h2></center>");
 			out.println("<center><a href=login.html>Click here to go to Login page.</a></center>");
 		}

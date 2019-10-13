@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.services.AdminService;
 import com.tables.Photographer;
@@ -16,11 +17,14 @@ public class ViewProfile extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String photographerId = request.getParameter("id");
-		AdminService adminService = new AdminService();
 		try {
-			Photographer photographerById = adminService.getPhotographerById(photographerId);
-		} catch (ClassNotFoundException | SQLException e) {
+			String photographerId = request.getParameter("id");
+			AdminService adminService = new AdminService();
+			Photographer photographer = adminService.getPhotographerById(photographerId);
+			HttpSession session = request.getSession();
+			session.setAttribute("photographer", photographer);
+			response.sendRedirect(request.getContextPath() + "/view-profile.jsp");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

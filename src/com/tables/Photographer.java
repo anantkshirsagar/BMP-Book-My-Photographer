@@ -9,8 +9,7 @@ public class Photographer {
 	private String city;
 	private String cameraType;
 	private String category;
-	private boolean isApproved;
-	private boolean isSubmitted;
+	private String status;
 
 	public String getName() {
 		return name;
@@ -60,18 +59,6 @@ public class Photographer {
 		this.category = category;
 	}
 
-	public boolean isApproved() {
-		return isApproved;
-	}
-
-	public void setApproved(boolean isApproved) {
-		this.isApproved = isApproved;
-	}
-
-	public boolean isSubmitted() {
-		return isSubmitted;
-	}
-
 	public long getMobileNo() {
 		return mobileNo;
 	}
@@ -80,15 +67,19 @@ public class Photographer {
 		this.mobileNo = mobileNo;
 	}
 
-	public void setSubmitted(boolean isSubmitted) {
-		this.isSubmitted = isSubmitted;
-	}
-
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

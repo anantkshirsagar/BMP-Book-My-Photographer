@@ -1,6 +1,7 @@
 package com.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -20,6 +21,7 @@ import com.bmp.utils.ConnectionUtils;
 import com.dbmanager.connection.setting.AbstractConnectionSettings;
 import com.file.upload.util.FileUploadUtils;
 import com.model.FileContent;
+import com.services.AdminService;
 import com.services.LoginService;
 import com.tables.Photographer;
 
@@ -53,19 +55,12 @@ public class PhotographerUpdationServlet extends HttpServlet {
 				prepareStatement.executeUpdate();
 				connectionSettings.closeConnection();
 			}
-			connectionSettings.build();
-			String update = "update photographer set name=?,email=?,password=?,mobile_no=?,is_approved=?,is_submitted=?,category=? where email =?";
-			PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(update);
-			prepareStatement.setString(1, photographer.getName());
-			prepareStatement.setString(2, photographer.getEmail());
-			prepareStatement.setString(3, photographer.getPassword());
-			prepareStatement.setLong(4, photographer.getMobileNo());
-			prepareStatement.setBoolean(5, false);
-			prepareStatement.setBoolean(6, true);
-			prepareStatement.setString(7, category);
-			prepareStatement.setString(8, email);
-			prepareStatement.executeUpdate();
-			connectionSettings.closeConnection();
+			photographer.setCategory(category);
+			new AdminService().updatePhotographer(photographer);
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html");
+			out.println("<center><h2 style=color:red> Application Submitted for verification !!</h2></center>");
+			out.println("<center>Your application will be verified within 3 to 4 working days.</center>");
 		} catch (FileUploadException e) {
 			LOG.error(e.toString());
 		} catch (SQLException e) {

@@ -52,8 +52,12 @@
 	<script type="text/javascript">
 		function checkFiles() {
 			var numFiles = $("input:file")[0].files.length;
-			if (numFiles > 5) {
-				alert("Maximum 5 files allowd!")
+			if (numFiles > 8) {
+				alert("Maximum 8 photos allowd!")
+				$("input:file")[0].value = null;
+			}
+			if (numFiles < 4) {
+				alert("Minimum 4 photos required!")
 				$("input:file")[0].value = null;
 			}
 		}

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.bmp.utils.AppConstants.PhotographerStatus;
 import com.bmp.utils.AppConstants.UserType;
 import com.services.RegistrationService;
 import com.tables.Customer;
@@ -32,8 +33,7 @@ public class RegistrationServlet extends HttpServlet {
 				photographer.setEmail(request.getParameter("email"));
 				photographer.setPassword(request.getParameter("password"));
 				photographer.setMobileNo(Long.parseLong(request.getParameter("mobileNo")));
-				photographer.setApproved(false);
-				photographer.setSubmitted(false);
+				photographer.setStatus(PhotographerStatus.NOT_SUBMITTED.name());
 				LOG.debug("Creating Photographer {}", photographer);
 				registrationService.insertPhotographer(photographer);
 			} else if (UserType.CUSTOMER.name().equals(registrationType)) {

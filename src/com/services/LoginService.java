@@ -70,11 +70,10 @@ public class LoginService {
 			photographer.setCity(resultSet.getString("city"));
 			photographer.setCameraType(resultSet.getString("camera_type"));
 			photographer.setCategory(resultSet.getString("category"));
-			photographer.setApproved(resultSet.getBoolean("is_approved"));
-			photographer.setSubmitted(resultSet.getBoolean("is_submitted"));
+			photographer.setStatus(resultSet.getString("status"));
 		}
 		connectionSettings.closeConnection();
-		LOG.debug("Email :" + email + " Approved : " + photographer.isApproved());
+		LOG.debug("Email :" + email + " Approved : " + photographer.getStatus());
 		return photographer;
 	}
 }
