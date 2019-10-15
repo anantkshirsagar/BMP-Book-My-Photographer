@@ -18,7 +18,7 @@
 </head>
 <body ng-app="">
 	<div class="container">
-		<form action="SearchPhotographer" method="get">
+		<form action="CustomerSearchPhotographer" method="get">
 			<br> <br>
 			<div class="row">
 				<div class="col-md-4">

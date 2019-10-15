@@ -69,11 +69,11 @@
 		<url-pattern>/ApproveOrRejectPhotographerServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>SearchPhotographer</servlet-name>
-		<servlet-class>com.servlet.SearchPhotographer</servlet-class>
+		<servlet-name>CustomerSearchPhotographer</servlet-name>
+		<servlet-class>com.servlet.CustomerSearchPhotographer</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>SearchPhotographer</servlet-name>
-		<url-pattern>/SearchPhotographer</url-pattern>
+		<servlet-name>CustomerSearchPhotographer</servlet-name>
+		<url-pattern>/CustomerSearchPhotographer</url-pattern>
 	</servlet-mapping>
 </web-app>

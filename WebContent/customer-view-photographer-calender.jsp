@@ -7,26 +7,24 @@
 <title>Bootstrap Example</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+	type="text/javascript"></script>
+<script src="lib/angjs.js"></script>
+<div ng-include="'commons/load-libs.html'"></div>
+<div ng-include="'commons/customer-nav-bar.html'"></div>
 </head>
-<body>
+<body ng-app="">
 	<div class="container">
 		<table class="table">
 			<tr>
-				<td align="center" width="14%">Sunday</td>
 				<td align="center" width="14%">Monday</td>
 				<td align="center" width="14%">Tuesday</td>
 				<td align="center" width="14%">Wednesday</td>
 				<td align="center" width="14%">Thursday</td>
 				<td align="center" width="14%">Friday</td>
 				<td align="center" width="14%">Saturday</td>
+				<td align="center" width="14%">Sunday</td>
 			</tr>
 
 			<%
@@ -34,33 +32,48 @@
 				LocalDate start = initial.withDayOfMonth(1);
 				LocalDate end = initial.withDayOfMonth(initial.lengthOfMonth());
 				LocalDate temp = start;
-
+				boolean flag = true;
 				int row = 0;
 				int count = end.getDayOfMonth();
+				if (flag) {
+					flag = false;
+					row = DayOfWeek.valueOf(temp.getDayOfWeek().toString()).ordinal();
+					for (int j = 0; j < row; j++) {
+			%>
+			<td width="14%"></td>
+			<%
+				}
+				}
 				for (int i = start.getDayOfMonth(); i <= count; ++i) {
 					String day = temp.getDayOfWeek().toString();
 					row++;
 					if (row == 8) {
 						count++;
 						row = 0;
-			%><tr></tr>
+			%>
+			<tr></tr>
 			<%
 				} else {
-						switch (day) {
-						case "SUNDAY":
+						/* switch (day) {
+						case "SUNDAY": */
 			%><td width="14%">
-				<div class="card">
-					<div class="card-body">
+				<div class="w3-card-4 w3-dark-grey"
+					style="width: 100%; object-fit: cover;">
+					<div class="w3-container w3-center">
+						<br>
 						<%=temp.format(DateTimeFormatter.ofPattern("dd-MMM-yy"))%>
+						<br> <br>
+						<button class="w3-button w3-green">Book</button>
+						<br> <br>
 					</div>
 				</div>
 			</td>
-			<%
+			<%-- <%
 				break;
 						case "MONDAY":
 			%><td width="14%">
-				<div class="card">
-					<div class="card-body">
+				<div class="w3-card-4 w3-dark-grey">
+					<div class="w3-container w3-center">
 						<%=temp.format(DateTimeFormatter.ofPattern("dd-MMM-yy"))%>
 					</div>
 				</div>
@@ -69,7 +82,7 @@
 				break;
 						case "TUESDAY":
 			%><td width="14%">
-				<div class="card">
+				<div class="w3-card-4 w3-dark-grey">
 					<div class="card-body">
 						<%=temp.format(DateTimeFormatter.ofPattern("dd-MMM-yy"))%>
 					</div>
@@ -79,7 +92,7 @@
 				break;
 						case "WEDNESDAY":
 			%><td width="14%">
-				<div class="card">
+				<div class="w3-card-4 w3-dark-grey">
 					<div class="card-body">
 						<%=temp.format(DateTimeFormatter.ofPattern("dd-MMM-yy"))%>
 					</div>
@@ -89,7 +102,7 @@
 				break;
 						case "THURSDAY":
 			%><td width="14%">
-				<div class="card">
+				<div class="w3-card-4 w3-dark-grey">
 					<div class="card-body">
 						<%=temp.format(DateTimeFormatter.ofPattern("dd-MMM-yy"))%>
 					</div>
@@ -99,7 +112,7 @@
 				break;
 						case "FRIDAY":
 			%><td width="14%">
-				<div class="card">
+				<div class="w3-card-4 w3-dark-grey">
 					<div class="card-body">
 						<%=temp.format(DateTimeFormatter.ofPattern("dd-MMM-yy"))%>
 					</div>
@@ -109,17 +122,15 @@
 				break;
 						case "SATURDAY":
 			%><td width="14%">
-				<div class="card">
+				<div class="w3-card-4 w3-dark-grey">
 					<div class="card-body">
 						<%=temp.format(DateTimeFormatter.ofPattern("dd-MMM-yy"))%>
 					</div>
 				</div>
-			</td>
+			</td> --%>
 			<%
-				break;
-						}
-
-						temp = temp.plusDays(1);
+				/* break;
+																} */ temp = temp.plusDays(1);
 					}
 				}
 			%>

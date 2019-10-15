@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -95,12 +96,12 @@ public class AdminService {
 		prepareStatement.executeUpdate();
 		connectionSettings.closeConnection();
 	}
-	
+
 	public List<Photographer> searchPhotographerByFilter(String city, String category)
-			throws ClassNotFoundException, SQLException{
+			throws ClassNotFoundException, SQLException {
 		List<Photographer> photographerList = new ArrayList<>();
-		if (city != null || category != null) {
-			if (city != null) {
+		if (StringUtils.isNotBlank(city) || StringUtils.isNotBlank(category)) {
+			if (StringUtils.isNotBlank(city)) {
 				connectionSettings.build();
 				String query = "select * from photographer where city='" + city.toLowerCase()
 						+ "' and status='APPROVED'";
@@ -115,7 +116,7 @@ public class AdminService {
 					photographerList.add(photographer);
 				}
 			}
-			if (category != null) {
+			if (StringUtils.isNotBlank(category)) {
 				connectionSettings.build();
 				String query = "select * from photographer where category='" + category.toLowerCase()
 						+ "' and status='APPROVED'";

@@ -17,7 +17,7 @@ import com.dbmanager.connection.setting.AbstractConnectionSettings;
 import com.services.AdminService;
 import com.tables.Photographer;
 
-public class SearchPhotographer extends HttpServlet {
+public class CustomerSearchPhotographer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -32,7 +32,7 @@ public class SearchPhotographer extends HttpServlet {
 			session.setAttribute("category", category);
 			session.setAttribute("city", city);
 			connectionSettings.closeConnection();
-			response.sendRedirect(request.getContextPath() + "/search-photographer.jsp");
+			response.sendRedirect(request.getContextPath() + "/customer-search-photographer.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

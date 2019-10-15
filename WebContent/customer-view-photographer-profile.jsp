@@ -94,23 +94,12 @@
 					<br>
 					<div class="row">
 						<a class="w3-button w3-black w3-block"
-							href="customer-book-order.jsp">Book Your Order</a>
+							href="customer-view-photographer-calender.jsp?<%=photographer.getId()%>">Book
+							Your Order</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-		function updatePhotographer(id,status){
-			 var xhr = new XMLHttpRequest();
-			 xhr.onreadystatechange = function() {
-				    if (this.readyState == 4 && this.status == 200) {
-				    	window.location.href = "photographer-approval-list.jsp";
-				    }
-				};
-				xhr.open('POST', "ApproveOrRejectPhotographerServlet?id="+id+"&status="+status, true);
-				xhr.send();
-		}
-	</script>
 </body>
 </html>
