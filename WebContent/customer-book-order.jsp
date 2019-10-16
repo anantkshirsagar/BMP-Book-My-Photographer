@@ -12,7 +12,55 @@
 <div ng-include="'commons/customer-nav-bar.html'"></div>
 <title>Insert title here</title>
 </head>
-<body>
-
+<%
+	String photographerId = request.getParameter("pId");
+	String userId = request.getParameter("uId");
+	session.setAttribute("photographerId", photographerId);
+	session.setAttribute("userId", userId);
+%>
+<body ng-app="">
+	<div class="jumbotron">
+		<div class="container">
+			<form action="CustomerBookOrder" method="post">
+				<h3>
+					<b>Order Details</b>
+				</h3>
+				<br>
+				<div class="row">
+					<div class="col-md-6">
+						<label>Title</label> <input class="w3-input" type="text"
+							name="title" id="title" required>
+					</div>
+					<div class="col-md-3">
+						<label>Order Date</label> <input type="date" name="title"
+							id="title" required>
+					</div>
+					<div class="col-md-2">
+						<label>Order Time</label> <input type="time" name="time" id="time"
+							required>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-12">
+						<label>Address</label> <input class="w3-input" type="text"
+							name="address" id="address" required>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-12">
+						<label>Notes</label>
+						<textarea style="float: left; width: 100%; resize: none;" rows="5">
+						</textarea>
+					</div>
+				</div>
+				<br> <br>
+				<button type="submit" class="w3-button w3-blue w3-large">Register</button>
+				<button type="reset" class="w3-button w3-black w3-large">Clear</button>
+				<br> <br> <br>
+			</form>
+		</div>
+	</div>
 </body>
 </html>

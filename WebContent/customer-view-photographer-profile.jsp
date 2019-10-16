@@ -94,7 +94,7 @@
 					<br>
 					<div class="row">
 						<a class="w3-button w3-black w3-block"
-							href="customer-view-photographer-calender.jsp?<%=photographer.getId()%>">Book
+							href="customer-view-photographer-calender.jsp?id=<%=photographer.getId()%>">Book
 							Your Order</a>
 					</div>
 				</div>

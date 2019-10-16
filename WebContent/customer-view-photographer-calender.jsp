@@ -28,6 +28,7 @@
 			</tr>
 
 			<%
+				String id = request.getParameter("id");
 				LocalDate initial = LocalDate.now();
 				LocalDate start = initial.withDayOfMonth(1);
 				LocalDate end = initial.withDayOfMonth(initial.lengthOfMonth());
@@ -54,83 +55,20 @@
 			<tr></tr>
 			<%
 				} else {
-						/* switch (day) {
-						case "SUNDAY": */
 			%><td width="14%">
 				<div class="w3-card-4 w3-dark-grey"
 					style="width: 100%; object-fit: cover;">
 					<div class="w3-container w3-center">
 						<br>
 						<%=temp.format(DateTimeFormatter.ofPattern("dd-MMM-yy"))%>
-						<br> <br>
-						<button class="w3-button w3-green">Book</button>
-						<br> <br>
+						<br> <br> <a class="w3-button w3-green"
+							href="customer-book-order.jsp?id=<%=id%>">Book</a> <br> <br>
 					</div>
 				</div>
 			</td>
-			<%-- <%
-				break;
-						case "MONDAY":
-			%><td width="14%">
-				<div class="w3-card-4 w3-dark-grey">
-					<div class="w3-container w3-center">
-						<%=temp.format(DateTimeFormatter.ofPattern("dd-MMM-yy"))%>
-					</div>
-				</div>
-			</td>
+
 			<%
-				break;
-						case "TUESDAY":
-			%><td width="14%">
-				<div class="w3-card-4 w3-dark-grey">
-					<div class="card-body">
-						<%=temp.format(DateTimeFormatter.ofPattern("dd-MMM-yy"))%>
-					</div>
-				</div>
-			</td>
-			<%
-				break;
-						case "WEDNESDAY":
-			%><td width="14%">
-				<div class="w3-card-4 w3-dark-grey">
-					<div class="card-body">
-						<%=temp.format(DateTimeFormatter.ofPattern("dd-MMM-yy"))%>
-					</div>
-				</div>
-			</td>
-			<%
-				break;
-						case "THURSDAY":
-			%><td width="14%">
-				<div class="w3-card-4 w3-dark-grey">
-					<div class="card-body">
-						<%=temp.format(DateTimeFormatter.ofPattern("dd-MMM-yy"))%>
-					</div>
-				</div>
-			</td>
-			<%
-				break;
-						case "FRIDAY":
-			%><td width="14%">
-				<div class="w3-card-4 w3-dark-grey">
-					<div class="card-body">
-						<%=temp.format(DateTimeFormatter.ofPattern("dd-MMM-yy"))%>
-					</div>
-				</div>
-			</td>
-			<%
-				break;
-						case "SATURDAY":
-			%><td width="14%">
-				<div class="w3-card-4 w3-dark-grey">
-					<div class="card-body">
-						<%=temp.format(DateTimeFormatter.ofPattern("dd-MMM-yy"))%>
-					</div>
-				</div>
-			</td> --%>
-			<%
-				/* break;
-																} */ temp = temp.plusDays(1);
+				temp = temp.plusDays(1);
 					}
 				}
 			%>
