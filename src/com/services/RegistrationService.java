@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import com.bmp.utils.ConnectionUtils;
 import com.dbmanager.connection.setting.AbstractConnectionSettings;
 import com.tables.Customer;
+import com.tables.Order;
 import com.tables.Photographer;
 
 public class RegistrationService {
@@ -45,6 +46,22 @@ public class RegistrationService {
 		prepareStatement.setLong(4, customer.getMobileNo());
 		prepareStatement.executeUpdate();
 		LOG.debug("Customer inserted");
+		connectionSettings.closeConnection();
+	}
+
+	public void insertOrder(Order order) throws ClassNotFoundException, SQLException {
+		connectionSettings.build();
+		String query = "insert into order(title,order_date,order_time,address,note,customer_id,photographer_id) values (?,?,?,?,?,?,?)";
+		PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query);
+		prepareStatement.setString(1, order.getTitle());
+		prepareStatement.setDate(2, order.getDate());
+		prepareStatement.setTime(3, order.getTime());
+		prepareStatement.setString(4, order.getAddress());
+		prepareStatement.setString(4, order.getNote());
+		prepareStatement.setLong(4, order.getCustomerId());
+		prepareStatement.setLong(4, order.getPhotographerId());
+		prepareStatement.executeUpdate();
+		LOG.debug("Order inserted");
 		connectionSettings.closeConnection();
 	}
 }

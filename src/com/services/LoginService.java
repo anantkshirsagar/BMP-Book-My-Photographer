@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.bmp.utils.ConnectionUtils;
 import com.dbmanager.connection.setting.AbstractConnectionSettings;
+import com.tables.Customer;
 import com.tables.Photographer;
 
 public class LoginService {
@@ -75,5 +76,22 @@ public class LoginService {
 		connectionSettings.closeConnection();
 		LOG.debug("Email :" + email + " Approved : " + photographer.getStatus());
 		return photographer;
+	}
+
+	public Customer getCustomerByEmailId(String email) throws IOException, ClassNotFoundException, SQLException {
+		connectionSettings.build();
+		String query = "select * from customer where email='" + email + "'";
+		PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query);
+		ResultSet resultSet = prepareStatement.executeQuery();
+		Customer customer = null;
+		if (resultSet.next()) {
+			customer = new Customer();
+			customer.setId(resultSet.getLong("id"));
+			customer.setName(resultSet.getString("name"));
+			customer.setEmail(resultSet.getString("email"));
+			customer.setMobileNo(resultSet.getLong("mobile_No"));
+		}
+		connectionSettings.closeConnection();
+		return customer;
 	}
 }

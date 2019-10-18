@@ -13,10 +13,8 @@
 <title>Insert title here</title>
 </head>
 <%
-	String photographerId = request.getParameter("pId");
-	String userId = request.getParameter("uId");
+	String photographerId = request.getParameter("id");
 	session.setAttribute("photographerId", photographerId);
-	session.setAttribute("userId", userId);
 %>
 <body ng-app="">
 	<div class="jumbotron">

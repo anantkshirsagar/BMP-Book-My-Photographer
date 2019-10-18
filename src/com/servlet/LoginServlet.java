@@ -66,6 +66,7 @@ public class LoginServlet extends HttpServlet {
 		}
 		if (loginAllowFlag && forwordPageURL != null) {
 			session.setAttribute("email", email);
+			session.setAttribute("userType", loginType);
 			response.sendRedirect(request.getContextPath() + "/" + forwordPageURL);
 		} else if (!submittedFlag) {
 			out.println("<center><h2 style=color:red> Invalid Username or Password !!</h2></center>");

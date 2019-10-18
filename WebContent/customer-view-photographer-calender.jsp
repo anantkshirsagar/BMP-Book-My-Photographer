@@ -28,7 +28,7 @@
 			</tr>
 
 			<%
-				String id = request.getParameter("id");
+				String photographerID = request.getParameter("id");
 				LocalDate initial = LocalDate.now();
 				LocalDate start = initial.withDayOfMonth(1);
 				LocalDate end = initial.withDayOfMonth(initial.lengthOfMonth());
@@ -62,7 +62,8 @@
 						<br>
 						<%=temp.format(DateTimeFormatter.ofPattern("dd-MMM-yy"))%>
 						<br> <br> <a class="w3-button w3-green"
-							href="customer-book-order.jsp?id=<%=id%>">Book</a> <br> <br>
+							href="customer-book-order.jsp?id=<%=photographerID%>">Book</a> <br>
+						<br>
 					</div>
 				</div>
 			</td>
