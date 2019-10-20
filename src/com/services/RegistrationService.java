@@ -51,15 +51,16 @@ public class RegistrationService {
 
 	public void insertOrder(Order order) throws ClassNotFoundException, SQLException {
 		connectionSettings.build();
-		String query = "insert into order(title,order_date,order_time,address,note,customer_id,photographer_id) values (?,?,?,?,?,?,?)";
+		String query = "insert into order_request(title,order_date,order_time,address,note,customer_id,photographer_id,status) values (?,?,?,?,?,?,?,?)";
 		PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query);
 		prepareStatement.setString(1, order.getTitle());
 		prepareStatement.setDate(2, order.getDate());
 		prepareStatement.setTime(3, order.getTime());
 		prepareStatement.setString(4, order.getAddress());
-		prepareStatement.setString(4, order.getNote());
-		prepareStatement.setLong(4, order.getCustomerId());
-		prepareStatement.setLong(4, order.getPhotographerId());
+		prepareStatement.setString(5, order.getNote());
+		prepareStatement.setLong(6, order.getCustomerId());
+		prepareStatement.setLong(7, order.getPhotographerId());
+		prepareStatement.setString(8, order.getStatus());
 		prepareStatement.executeUpdate();
 		LOG.debug("Order inserted");
 		connectionSettings.closeConnection();

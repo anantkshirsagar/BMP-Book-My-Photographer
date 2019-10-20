@@ -22,7 +22,7 @@
 	String id = request.getParameter("id");
 	Photographer photographer = new AdminService().getPhotographerById(id);
 	String functionToLoad = "";
-	List<FileContent> fileContentList = new AdminService().getPhotosByIdPhotographer(id);
+	List<FileContent> fileContentList = new AdminService().getPhotosByPhotographerId(id);
 	for (FileContent file : fileContentList) {
 		functionToLoad = functionToLoad + "showImage(" + file.getFileName() + ", 'ImageServlet?photoId="
 				+ file.getFileName() + "');";

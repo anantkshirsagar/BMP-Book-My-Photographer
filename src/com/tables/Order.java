@@ -6,12 +6,13 @@ import java.sql.Time;
 import com.bmp.utils.AppConstants.OrderStatus;
 
 public class Order {
+	private long id;
 	private String title;
 	private Date date;
 	private Time time;
 	private String address;
 	private String note;
-	private String status = OrderStatus.DRAFT.name();
+	private String status = OrderStatus.SUBMITTED.name();
 	private long photographerId;
 	private long customerId;
 
@@ -77,6 +78,14 @@ public class Order {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }

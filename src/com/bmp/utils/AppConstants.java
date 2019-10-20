@@ -10,7 +10,7 @@ public interface AppConstants {
 	}
 
 	public enum OrderStatus {
-		DRAFT, SUBMITTED, APPROVED, REJECTED, CANCELED
+		SUBMITTED, APPROVED, REJECTED, CANCELED
 	}
 
 	String ADMIN_USERNAME = "admin";

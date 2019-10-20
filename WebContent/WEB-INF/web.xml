@@ -84,4 +84,12 @@
 		<servlet-name>CustomerBookOrder</servlet-name>
 		<url-pattern>/CustomerBookOrder</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>ApproveOrRejectOrderServlet</servlet-name>
+		<servlet-class>com.servlet.ApproveOrRejectOrderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ApproveOrRejectOrderServlet</servlet-name>
+		<url-pattern>/ApproveOrRejectOrderServlet</url-pattern>
+	</servlet-mapping>
 </web-app>

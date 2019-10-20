@@ -32,17 +32,19 @@ select * from customer;
 
 create table if not exists order_request(
 id bigint primary key auto_increment,
+title varchar(255),
 order_date date,
 order_time time,
 address varchar(255),
-category  varchar(255),
 camera_type  varchar(255),
 note varchar(255),
-user_id bigint references user on delete cascade on update cascade,   
+customer_id bigint references user on delete cascade on update cascade,   
 photographer_id bigint references photographer on delete cascade on update cascade,
 status varchar(255));
+drop table order_request;
+select * from order_request;
 
-create table if not exists  order_request(
+create table if not exists  feedback(
 id bigint primary key auto_increment,
 feedback varchar(255),
 user_id bigint references user on delete cascade on update cascade,   

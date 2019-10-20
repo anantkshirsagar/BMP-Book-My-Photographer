@@ -30,12 +30,33 @@
 							name="title" id="title" required>
 					</div>
 					<div class="col-md-3">
-						<label>Order Date</label> <input type="date" name="title"
+						<label>Order Date</label> <input type="date" name="date"
 							id="title" required>
 					</div>
 					<div class="col-md-2">
-						<label>Order Time</label> <input type="time" name="time" id="time"
-							required>
+						<label>Order Time </label><input type="time" name="time"
+							id="title" required>
+						<%-- <div class="row">
+							<select placeholder="HH" name="hours" required>
+								<option disabled selected>HH</option>
+								<%
+									for (int i = 1; i < 25; i++) {
+								%>
+								<option value="<%=i%>"><%=i%></option>
+								<%
+									}
+								%>
+							</select> <select name="minutes" required>
+								<option disabled selected>MM</option>
+								<%
+									for (int i = 1; i < 61; i++) {
+								%>
+								<option value="<%=i%>"><%=i%></option>
+								<%
+									}
+								%>
+							</select>
+						</div> --%>
 					</div>
 				</div>
 				<br>
@@ -49,7 +70,8 @@
 				<div class="row">
 					<div class="col-md-12">
 						<label>Notes</label>
-						<textarea style="float: left; width: 100%; resize: none;" rows="5">
+						<textarea style="float: left; width: 100%; resize: none;" rows="5"
+							name="note">
 						</textarea>
 					</div>
 				</div>
