@@ -1,3 +1,4 @@
+<%@page import="com.bmp.utils.AppConstants.OrderStatus"%>
 <%@page import="com.tables.Order"%>
 <%@page import="java.util.Base64"%>
 <%@page import="com.model.FileContent"%>
@@ -66,6 +67,9 @@
 			</div>
 		</div>
 		<br> <br>
+		<%
+			if (order.getStatus().equals(OrderStatus.APPROVED) || order.getStatus().equals(OrderStatus.REJECTED)) {
+		%>
 		<div class="row">
 			<div class="col-md-6">
 				<button class="w3-button w3-block w3-green"
@@ -76,6 +80,9 @@
 					onclick="updateOrder(<%=id%>,'REJECTED')">Reject</button>
 			</div>
 		</div>
+		<%
+			}
+		%>
 		<br> <br> <br>
 	</div>
 	<script type="text/javascript">

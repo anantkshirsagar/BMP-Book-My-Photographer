@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="java.sql.Date"%>
 <%@page import="com.tables.Order"%>
 <%@page import="com.tables.Photographer"%>
@@ -16,12 +17,46 @@
 	type="text/javascript"></script>
 <script src="lib/angjs.js"></script>
 <div ng-include="'commons/load-libs.html'"></div>
-<div ng-include="'commons/customer-nav-bar.html'"></div>
+<div ng-include="'commons/photographer-nav-bar.html'"></div>
 </head>
 <body ng-app="">
 	<div class="container">
+		<br>
+		<%
+			boolean isNextMonth = Boolean.valueOf(request.getParameter("isNextMonth"));
+		%>
+		<div class="row">
+			<div class="col-md-2">
+				<%
+					if (isNextMonth) {
+				%>
+				<a class="w3-button w3-green"
+					href="photographer-view-photographer-calender.jsp">Previous</a>
+				<%
+					}
+				%>
+			</div>
+			<div class="col-md-9">
+				<center>
+					<h3>
+						<%=isNextMonth ? StringUtils.capitalize(LocalDate.now().getMonth().plus(1).name().toLowerCase())
+					: StringUtils.capitalize(LocalDate.now().getMonth().name().toLowerCase())%></h3>
+				</center>
+			</div>
+			<div class="col-md-1">
+				<%
+					if (!isNextMonth) {
+				%>
+				<a class="w3-button w3-green"
+					href="photographer-view-photographer-calender.jsp?isNextMonth=true">Next</a>
+				<%
+					}
+				%>
+			</div>
+		</div>
+		<br>
 		<table class="table">
-			<tr>
+			<tr class="w3-blue">
 				<td align="center" width="14%">Monday</td>
 				<td align="center" width="14%">Tuesday</td>
 				<td align="center" width="14%">Wednesday</td>
@@ -42,6 +77,9 @@
 					orderMap.put(order.getDate(), order.getId());
 				}
 				LocalDate initial = LocalDate.now();
+				if (isNextMonth) {
+					initial = initial.plusMonths(1);
+				}
 				LocalDate start = initial.withDayOfMonth(1);
 				LocalDate end = initial.withDayOfMonth(initial.lengthOfMonth());
 				LocalDate temp = start;
@@ -78,12 +116,12 @@
 							if (orderMap.get(Date.valueOf(temp)) != null) {
 						%>
 						<a class="w3-button w3-green"
-							href="photographer-view-order.jsp?id=<%=orderMap.get(Date.valueOf(temp))%>">View</a>
-						<br>
+							href="photographer-view-order.jsp?id=<%=orderMap.get(Date.valueOf(temp))%>">View
+							Order</a> <br>
 						<%
 							} else {
 						%>
-						<br> <br>
+						<span><b>Not Booked</b></span> <br> <br>
 						<%
 							}
 						%>

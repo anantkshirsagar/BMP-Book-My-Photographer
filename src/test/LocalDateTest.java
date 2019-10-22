@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.bmp.utils.ConnectionUtils;
 import com.bmp.utils.UtilService;
 import com.dbmanager.connection.setting.AbstractConnectionSettings;
@@ -30,6 +32,9 @@ public class LocalDateTest {
 		// Date date = new Date();
 		// System.out.println(UtilService.getSQLDate(date));
 		// System.out.println(UtilService.getSQLTime(date));
+		String name = LocalDate.now().getMonth().name().toLowerCase();
+		String capitalize = StringUtils.capitalize(name);
+		System.out.print(capitalize);
 		LocalDate date = LocalDate.now();
 		DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		date.format(df);

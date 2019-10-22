@@ -1,3 +1,7 @@
+<%@page import="org.apache.commons.lang3.StringUtils"%>
+<%@page import="com.tables.Order"%>
+<%@page import="java.sql.Date"%>
+<%@page import="com.services.AdminService"%>
 <%@page import="java.time.format.FormatStyle"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page language="java" import="java.util.*,java.time.*"%>
@@ -16,6 +20,39 @@
 </head>
 <body ng-app="">
 	<div class="container">
+		<br>
+		<%
+			boolean isNextMonth = Boolean.valueOf(request.getParameter("isNextMonth"));
+		%>
+		<div class="row">
+			<div class="col-md-2">
+				<%
+					if (isNextMonth) {
+				%>
+				<a class="w3-button w3-green"
+					href="customer-view-photographer-calender.jsp">Previous</a>
+				<%
+					}
+				%>
+			</div>
+			<div class="col-md-9">
+				<center>
+					<h3>
+						<%=isNextMonth ? StringUtils.capitalize(LocalDate.now().getMonth().plus(1).name().toLowerCase())
+					: StringUtils.capitalize(LocalDate.now().getMonth().name().toLowerCase())%></h3>
+				</center>
+			</div>
+			<div class="col-md-1">
+				<%
+					if (!isNextMonth) {
+				%>
+				<a class="w3-button w3-green"
+					href="customer-view-photographer-calender.jsp?isNextMonth=true">Next</a>
+				<%
+					}
+				%>
+			</div>
+		</div>
 		<table class="table">
 			<tr>
 				<td align="center" width="14%">Monday</td>
@@ -28,8 +65,18 @@
 			</tr>
 
 			<%
+				AdminService adminService = new AdminService();
 				String photographerID = request.getParameter("id");
+				List<Order> orderList = adminService.getApprovedOrdersByPhotographerId(photographerID);
+				Map<Date, Long> orderMap = new HashMap<>();
+				for (Order order : orderList) {
+					orderMap.put(order.getDate(), order.getId());
+				}
+
 				LocalDate initial = LocalDate.now();
+				if (isNextMonth) {
+					initial = initial.plusMonths(1);
+				}
 				LocalDate start = initial.withDayOfMonth(1);
 				LocalDate end = initial.withDayOfMonth(initial.lengthOfMonth());
 				LocalDate temp = start;
@@ -61,9 +108,24 @@
 					<div class="w3-container w3-center">
 						<br>
 						<%=temp.format(DateTimeFormatter.ofPattern("dd-MMM-yy"))%>
-						<br> <br> <a class="w3-button w3-green"
-							href="customer-book-order.jsp?id=<%=photographerID%>">Book</a> <br>
-						<br>
+						<br> <br>
+						<%
+							if (orderMap.get(Date.valueOf(temp)) == null && LocalDate.now().isBefore(temp)) {
+						%>
+						<a class="w3-button w3-green"
+							href="customer-book-order.jsp?id=<%=photographerID%>">Book</a>
+						<%
+							} else if (temp.isBefore(LocalDate.now()) || temp.equals(LocalDate.now())) {
+						%>
+						<span><b>Not Available</b></span>
+						<%
+							} else {
+						%>
+						<span><b>Already Booked</b></span>
+						<%
+							}
+						%>
+						<br> <br>
 					</div>
 				</div>
 			</td>

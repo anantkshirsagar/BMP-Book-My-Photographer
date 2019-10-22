@@ -290,6 +290,7 @@ public class AdminService {
 		return photographerList;
 	}
 
+	@Deprecated
 	public boolean isAnyOrderFind(LocalDate date) throws SQLException, ClassNotFoundException {
 		DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		date.format(df);
