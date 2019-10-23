@@ -40,6 +40,7 @@ camera_type  varchar(255),
 note varchar(255),
 customer_id bigint references user on delete cascade on update cascade,   
 photographer_id bigint references photographer on delete cascade on update cascade,
+feedback_id bigint references photographer on delete cascade on update cascade,
 status varchar(255));
 drop table order_request;
 select * from order_request;
@@ -47,5 +48,7 @@ select * from order_request;
 create table if not exists  feedback(
 id bigint primary key auto_increment,
 feedback varchar(255),
-user_id bigint references user on delete cascade on update cascade,   
+customer_id bigint references user on delete cascade on update cascade,   
 photographer_id bigint references photographer on delete cascade on update cascade);
+drop table feedback;
+select * from feedback;

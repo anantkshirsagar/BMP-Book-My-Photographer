@@ -15,7 +15,7 @@
 	type="text/javascript"></script>
 <script src="lib/angjs.js"></script>
 <div ng-include="'commons/load-libs.html'"></div>
-<div ng-include="'commons/admin-nav-bar.html'"></div>
+<div ng-include="'commons/customer-nav-bar.html'"></div>
 <script src="js/commons.js"></script>
 <title>Insert title here</title>
 </head>

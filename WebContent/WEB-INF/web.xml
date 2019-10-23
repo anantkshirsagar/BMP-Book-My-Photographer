@@ -92,4 +92,12 @@
 		<servlet-name>ApproveOrRejectOrderServlet</servlet-name>
 		<url-pattern>/ApproveOrRejectOrderServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>CustomerFeedback</servlet-name>
+		<servlet-class>com.servlet.CustomerFeedback</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CustomerFeedback</servlet-name>
+		<url-pattern>/CustomerFeedback</url-pattern>
+	</servlet-mapping>
 </web-app>

@@ -15,6 +15,7 @@ public class Order {
 	private String status = OrderStatus.SUBMITTED.name();
 	private long photographerId;
 	private long customerId;
+	private long feedbackId;
 
 	public String getTitle() {
 		return title;
@@ -86,6 +87,14 @@ public class Order {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public long getFeedbackId() {
+		return feedbackId;
+	}
+
+	public void setFeedbackId(long feedbackId) {
+		this.feedbackId = feedbackId;
 	}
 
 }

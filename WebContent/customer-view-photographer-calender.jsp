@@ -92,6 +92,7 @@
 			<%
 				}
 				}
+				LocalDate todaysDate = LocalDate.now();
 				for (int i = start.getDayOfMonth(); i <= count; ++i) {
 					String day = temp.getDayOfWeek().toString();
 					row++;
@@ -110,12 +111,12 @@
 						<%=temp.format(DateTimeFormatter.ofPattern("dd-MMM-yy"))%>
 						<br> <br>
 						<%
-							if (orderMap.get(Date.valueOf(temp)) == null && LocalDate.now().isBefore(temp)) {
+							if (orderMap.get(Date.valueOf(temp)) == null && todaysDate.isBefore(temp)) {
 						%>
 						<a class="w3-button w3-green"
 							href="customer-book-order.jsp?id=<%=photographerID%>">Book</a>
 						<%
-							} else if (temp.isBefore(LocalDate.now()) || temp.equals(LocalDate.now())) {
+							} else if (temp.isBefore(LocalDate.now()) || temp.equals(todaysDate)) {
 						%>
 						<span><b>Not Available</b></span>
 						<%

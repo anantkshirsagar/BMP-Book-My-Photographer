@@ -16,7 +16,9 @@ import org.slf4j.LoggerFactory;
 import com.bmp.utils.ConnectionUtils;
 import com.dbmanager.connection.setting.AbstractConnectionSettings;
 import com.model.FileContent;
+import com.mysql.jdbc.Statement;
 import com.tables.Customer;
+import com.tables.Feedback;
 import com.tables.Order;
 import com.tables.Photographer;
 
@@ -224,7 +226,7 @@ public class AdminService {
 
 	public void updateOrder(Order order) throws SQLException, ClassNotFoundException {
 		connectionSettings.build();
-		String update = "update order_request set title=?,order_date=?,order_time=?,address=?,note=?,customer_id=?,photographer_id=?,status=? where id =?";
+		String update = "update order_request set title=?,order_date=?,order_time=?,address=?,note=?,customer_id=?,photographer_id=?,feedback_id=?,status=? where id =?";
 		PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(update);
 		prepareStatement.setString(1, order.getTitle());
 		prepareStatement.setDate(2, order.getDate());
@@ -233,8 +235,9 @@ public class AdminService {
 		prepareStatement.setString(5, order.getNote());
 		prepareStatement.setLong(6, order.getCustomerId());
 		prepareStatement.setLong(7, order.getPhotographerId());
-		prepareStatement.setString(8, order.getStatus());
-		prepareStatement.setLong(9, order.getId());
+		prepareStatement.setLong(8, order.getFeedbackId());
+		prepareStatement.setString(9, order.getStatus());
+		prepareStatement.setLong(10, order.getId());
 		prepareStatement.executeUpdate();
 		connectionSettings.closeConnection();
 	}
@@ -288,6 +291,22 @@ public class AdminService {
 			}
 		}
 		return photographerList;
+	}
+
+	public long insertFeedback(Feedback feedback) throws ClassNotFoundException, SQLException {
+		connectionSettings.build();
+		String query = "insert into feedback(feedback,customer_id,photographer_id) values (?,?,?)";
+		PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query,
+				Statement.RETURN_GENERATED_KEYS);
+		prepareStatement.setString(1, feedback.getFeedback());
+		prepareStatement.setLong(2, feedback.getCustomerId());
+		prepareStatement.setLong(3, feedback.getPhotographerId());
+		prepareStatement.executeUpdate();
+		ResultSet rs = prepareStatement.getGeneratedKeys();
+		rs.next();
+		long id = rs.getLong(1);
+		connectionSettings.closeConnection();
+		return id;
 	}
 
 	@Deprecated

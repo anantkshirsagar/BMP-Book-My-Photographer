@@ -43,6 +43,8 @@
 							<td><%=order.getStatus()%></td>
 							<td><a href="customer-view-order.jsp?id=<%=order.getId()%>">View
 									Order</a></td>
+							<td><a href="customer-feedback.jsp?id=<%=order.getId()%>">View
+									Order</a></td>
 						</tr>
 						<%
 							}
