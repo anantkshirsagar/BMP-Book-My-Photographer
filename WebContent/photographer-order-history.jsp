@@ -1,3 +1,4 @@
+<%@page import="com.bmp.utils.AppConstants.OrderStatus"%>
 <%@page import="com.tables.Photographer"%>
 <%@page import="com.tables.Customer"%>
 <%@page import="com.tables.Order"%>
@@ -22,11 +23,12 @@
 				<table class="w3-table-all">
 					<thead>
 						<tr class="w3-green">
-							<th>Id</th>
-							<th>Title</th>
-							<th>Date</th>
-							<th>Status</th>
-							<th>Action</th>
+							<th style="width: 10%">Id</th>
+							<th style="width: 30%">Title</th>
+							<th style="width: 20%">Date</th>
+							<th style="width: 20%">Status</th>
+							<th style="width: 10%">Actions</th>
+							<th style="width: 10%"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -42,9 +44,18 @@
 							<td><%=order.getTitle()%></td>
 							<td><%=order.getDate()%></td>
 							<td><%=order.getStatus()%></td>
-							<td><a
+							<td><a class="w3-button w3-black"
 								href="photographer-view-order.jsp?id=<%=order.getId()%>">View
 									Order</a></td>
+							<td>
+								<%
+									if (order.getStatus().equals(OrderStatus.COMPLETED.name()) && order.getFeedbackId() > 0) {
+								%> <a class="w3-button w3-black"
+								href="view-feedback.jsp?id=<%=order.getFeedbackId()%>">View
+									Feedback</a> <%
+ 	}
+ %>
+							</td>
 						</tr>
 						<%
 							}

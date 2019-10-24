@@ -19,6 +19,7 @@ public class CustomerFeedback extends HttpServlet {
 		try {
 			String orderId = request.getParameter("orderId");
 			String feedback = request.getParameter("feedback");
+			System.out.println(orderId + "  " + feedback);
 			AdminService adminService = new AdminService();
 			Order order = adminService.getOrderById(orderId);
 

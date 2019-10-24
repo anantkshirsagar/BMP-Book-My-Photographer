@@ -70,6 +70,23 @@ public class AdminService {
 		return photographer;
 	}
 
+	public Feedback getFeedbackById(String id) throws IOException, ClassNotFoundException, SQLException {
+		connectionSettings.build();
+		String query = "select * from feedback where id='" + id + "'";
+		PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query);
+		ResultSet resultSet = prepareStatement.executeQuery();
+		Feedback feedback = null;
+		if (resultSet.next()) {
+			feedback = new Feedback();
+			feedback.setId(resultSet.getLong("id"));
+			feedback.setFeedback(resultSet.getString("feedback"));
+			feedback.setCustomerId(resultSet.getLong("customer_id"));
+			feedback.setPhotographerId(resultSet.getLong("photographer_id"));
+		}
+		connectionSettings.closeConnection();
+		return feedback;
+	}
+
 	public Photographer getPhotographerByEmailId(String email)
 			throws IOException, ClassNotFoundException, SQLException {
 		connectionSettings.build();
@@ -161,6 +178,7 @@ public class AdminService {
 			order.setTitle(resultSet.getString("title"));
 			order.setDate(resultSet.getDate("order_date"));
 			order.setStatus(resultSet.getString("status"));
+			order.setFeedbackId(resultSet.getLong("feedback_id"));
 			list.add(order);
 		}
 		connectionSettings.closeConnection();
@@ -180,6 +198,7 @@ public class AdminService {
 			order.setTitle(resultSet.getString("title"));
 			order.setDate(resultSet.getDate("order_date"));
 			order.setStatus(resultSet.getString("status"));
+			order.setFeedbackId(resultSet.getLong("feedback_id"));
 			list.add(order);
 		}
 		connectionSettings.closeConnection();
