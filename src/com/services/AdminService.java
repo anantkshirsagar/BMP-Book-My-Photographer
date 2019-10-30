@@ -179,6 +179,8 @@ public class AdminService {
 			order.setDate(resultSet.getDate("order_date"));
 			order.setStatus(resultSet.getString("status"));
 			order.setFeedbackId(resultSet.getLong("feedback_id"));
+			order.setPhotographerId(resultSet.getLong("photographer_id"));
+			order.setCustomerId(resultSet.getLong("customer_id"));
 			list.add(order);
 		}
 		connectionSettings.closeConnection();

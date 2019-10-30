@@ -3,6 +3,11 @@
 <%@page import="java.util.List"%>
 <%@page import="com.tables.Photographer"%>
 <%@ page language="java"%>
+<%
+	if (session.getAttribute("email") == null) {
+		response.sendRedirect(request.getContextPath() + "/logout.html");
+	}
+%>
 <html>
 <head>
 <title>Approval List</title>

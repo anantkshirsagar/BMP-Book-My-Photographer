@@ -6,7 +6,11 @@
 <%@page import="java.time.format.FormatStyle"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page language="java" import="java.util.*,java.time.*"%>
-
+<%
+	if (session.getAttribute("email") == null) {
+		response.sendRedirect(request.getContextPath() + "/logout.html");
+	}
+%>
 <html lang="en">
 <head>
 <title>Bootstrap Example</title>

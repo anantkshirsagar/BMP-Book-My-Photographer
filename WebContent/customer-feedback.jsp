@@ -1,6 +1,11 @@
 <%@page import="com.tables.Order"%>
 <%@page import="com.services.AdminService"%>
 <%@ page language="java"%>
+<%
+	if (session.getAttribute("email") == null) {
+		response.sendRedirect(request.getContextPath() + "/logout.html");
+	}
+%>
 <html>
 <head>
 <title></title>

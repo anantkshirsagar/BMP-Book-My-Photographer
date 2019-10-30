@@ -17,6 +17,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.bmp.utils.AppConstants.PhotographerStatus;
 import com.bmp.utils.ConnectionUtils;
 import com.dbmanager.connection.setting.AbstractConnectionSettings;
 import com.file.upload.util.FileUploadUtils;
@@ -38,14 +39,12 @@ public class PhotographerUpdationServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			String email = (String) session.getAttribute("email");
 			String category = request.getParameter("category");
-			String PATH = "S:\\suyog\\NSG 2019\\BMP-Book-My-Photographer\\WebContent\\images";
 			AbstractConnectionSettings connectionSettings = ConnectionUtils.getConnectionSettings();
 
 			Photographer photographer = new LoginService().getPhotographerByEmailId(email);
 			for (FileContent fileContent : fileContents) {
 				if (fileContent.getFileName() == null)
 					continue;
-				FileUploadUtils.writeStream(fileContent.getInputStream(), fileContent.getFileName(), PATH);
 				connectionSettings.build();
 				String query = "insert into photo(photo_name,photo,photographer_id) values (?,?,?)";
 				PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query);
@@ -56,6 +55,7 @@ public class PhotographerUpdationServlet extends HttpServlet {
 				connectionSettings.closeConnection();
 			}
 			photographer.setCategory(category);
+			photographer.setStatus(PhotographerStatus.SUBMITTED.name());
 			new AdminService().updatePhotographer(photographer);
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html");

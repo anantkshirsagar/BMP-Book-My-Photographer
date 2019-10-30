@@ -5,7 +5,11 @@
 <%@page import="java.time.format.FormatStyle"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page language="java" import="java.util.*,java.time.*"%>
-
+<%
+	if (session.getAttribute("email") == null) {
+		response.sendRedirect(request.getContextPath() + "/logout.html");
+	}
+%>
 <html lang="en">
 <head>
 <title>Bootstrap Example</title>
@@ -23,6 +27,7 @@
 		<br>
 		<%
 			boolean isNextMonth = Boolean.valueOf(request.getParameter("isNextMonth"));
+			String photographerID = request.getParameter("id");
 		%>
 		<div class="row">
 			<div class="col-md-2">
@@ -30,7 +35,7 @@
 					if (isNextMonth) {
 				%>
 				<a class="w3-button w3-green"
-					href="customer-view-photographer-calender.jsp">Previous</a>
+					href="customer-view-photographer-calender.jsp?id=<%=photographerID%>">Previous</a>
 				<%
 					}
 				%>
@@ -47,7 +52,7 @@
 					if (!isNextMonth) {
 				%>
 				<a class="w3-button w3-green"
-					href="customer-view-photographer-calender.jsp?isNextMonth=true">Next</a>
+					href="customer-view-photographer-calender.jsp?id=<%=photographerID%>&isNextMonth=true">Next</a>
 				<%
 					}
 				%>
@@ -66,7 +71,6 @@
 
 			<%
 				AdminService adminService = new AdminService();
-				String photographerID = request.getParameter("id");
 				List<Order> orderList = adminService.getApprovedOrdersByPhotographerId(photographerID);
 				Map<Date, Long> orderMap = new HashMap<>();
 				for (Order order : orderList) {
@@ -114,7 +118,7 @@
 							if (orderMap.get(Date.valueOf(temp)) == null && todaysDate.isBefore(temp)) {
 						%>
 						<a class="w3-button w3-green"
-							href="customer-book-order.jsp?id=<%=photographerID%>">Book</a>
+							href="customer-book-order.jsp?id=<%=photographerID%>&date=<%=temp.toString()%>">Book</a>
 						<%
 							} else if (temp.isBefore(LocalDate.now()) || temp.equals(todaysDate)) {
 						%>

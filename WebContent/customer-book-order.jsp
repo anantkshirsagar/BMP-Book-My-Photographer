@@ -1,6 +1,12 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	if (session.getAttribute("email") == null) {
+		response.sendRedirect(request.getContextPath() + "/logout.html");
+	}
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -14,6 +20,9 @@
 </head>
 <%
 	String photographerId = request.getParameter("id");
+	String dateStr = request.getParameter("date");
+	/* Date date = new Date(Long.valueOf(dateStr));
+	System.out.print(date); */
 	session.setAttribute("photographerId", photographerId);
 %>
 <body ng-app="">
@@ -30,8 +39,11 @@
 							name="title" id="title" required>
 					</div>
 					<div class="col-md-3">
-						<label>Order Date</label> <input type="date" name="date"
-							id="title" required>
+						<label>Order Date</label> <input class="w3-input" type="text"
+							name="date" id="date" disabled value="<%=dateStr%>">
+						<%-- <input type="date" name="date"
+							value="<%=date%>" id="title" disabled
+							pattern="MM/dd/yyyy - HH:mm:ss"> --%>
 					</div>
 					<div class="col-md-2">
 						<label>Order Time </label><input type="time" name="time"
@@ -76,7 +88,8 @@
 					</div>
 				</div>
 				<br> <br>
-				<button type="submit" class="w3-button w3-blue w3-large">Register</button>
+				<button type="submit" class="w3-button w3-blue w3-large">Submit
+					Order</button>
 				<button type="reset" class="w3-button w3-black w3-large">Clear</button>
 				<br> <br> <br>
 			</form>

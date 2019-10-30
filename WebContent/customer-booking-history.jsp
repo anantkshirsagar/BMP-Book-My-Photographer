@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.time.LocalDate"%>
 <%@page import="org.apache.commons.collections4.CollectionUtils"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.bmp.utils.AppConstants.OrderStatus"%>
@@ -7,6 +10,11 @@
 <%@page import="com.services.AdminService"%>
 <%@page import="java.util.List"%>
 <%@ page language="java"%>
+<%
+	if (session.getAttribute("email") == null) {
+		response.sendRedirect(request.getContextPath() + "/logout.html");
+	}
+%>
 <html>
 <head>
 <title>Approval List</title>
@@ -37,8 +45,18 @@
 						String email = (String) session.getAttribute("email");
 						Customer customer = adminService.getCustomerByEmailId(email);
 						List<Order> orderList = adminService.getOrdersByCustomerId(String.valueOf(customer.getId()));
+						Date todaysDate = new Date();
 						if (CollectionUtils.isNotEmpty(orderList)) {
 							for (Order order : orderList) {
+								if (order.getDate().before(todaysDate)) {
+									if (!order.getStatus().equals(OrderStatus.APPROVED.name())
+											&& !order.getStatus().equals(OrderStatus.REJECTED.name())) {
+										order.setStatus(OrderStatus.CANCELED.name());
+									} else if (order.getStatus().equals(OrderStatus.APPROVED.name())) {
+										order.setStatus(OrderStatus.COMPLETED.name());
+									}
+									adminService.updateOrder(order);
+								}
 					%>
 					<tr>
 						<td><%=order.getId()%></td>
@@ -54,12 +72,12 @@
 							%> <a class="w3-button w3-black"
 							href="customer-feedback.jsp?id=<%=order.getId()%>">Submit
 								Feedback</a> <%
-							 	} else if (order.getFeedbackId() > 0) {
-							 %><a class="w3-button w3-black"
+ 	} else if (order.getFeedbackId() > 0) {
+ %><a class="w3-button w3-black"
 							href="view-feedback.jsp?id=<%=order.getFeedbackId()%>">View
 								Feedback</a> <%
-							 	}
-							 %>
+ 	}
+ %>
 						</td>
 					</tr>
 					<%

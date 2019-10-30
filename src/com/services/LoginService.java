@@ -67,6 +67,7 @@ public class LoginService {
 			photographer.setId(resultSet.getLong("id"));
 			photographer.setName(resultSet.getString("name"));
 			photographer.setEmail(resultSet.getString("email"));
+			photographer.setPassword(resultSet.getString("password"));
 			photographer.setMobileNo(resultSet.getLong("mobile_No"));
 			photographer.setCity(resultSet.getString("city"));
 			photographer.setCameraType(resultSet.getString("camera_type"));

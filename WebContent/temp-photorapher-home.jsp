@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<%
+	if (session.getAttribute("email") == null) {
+		response.sendRedirect(request.getContextPath() + "/logout.html");
+	}
+%>
 <html>
 <head>
 <title>Photographer Profile</title>
@@ -20,13 +25,13 @@
 					<br>
 					<form action="PhotographerUpdationServlet" method="post"
 						enctype="multipart/form-data">
-						<label>Camera Type </label> <input class="w3-check"
+						<!-- <label>Camera Type </label> <input class="w3-check"
 							type="checkbox" name="cameraType"> <label>Full
 							Frame</label> <input class="w3-check" type="checkbox" name="cameraType">
-						<label>Crop Frame</label> <br> <br> <label>Category(add
+						<label>Crop Frame</label> <br>  --><br> <label>Category(add
 							comma separated multiple categories)</label> <input class="w3-input"
 							type="text" name="category" required> <br> <br>
-						<label>Upload Your best photos(Maximum 5)</label> <input
+						<label>Upload Your best photos(Maximum 8)</label> <input
 							type="file" id="files" name="filename" id="uploadBox" multiple
 							accept="image/*" onchange="checkFiles()">
 						<!-- <input type="file" name="filename" value="Upload File"  multiple> -->
