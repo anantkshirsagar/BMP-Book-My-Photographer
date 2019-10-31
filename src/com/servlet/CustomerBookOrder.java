@@ -36,6 +36,7 @@ public class CustomerBookOrder extends HttpServlet {
 			order.setPhotographerId(Long.valueOf(photographerId));
 			order.setCustomerId(customer.getId());
 			String date = request.getParameter("date");
+			System.out.println(date);
 			SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
 			order.setDate(UtilService.getSQLDate(sdfDate.parse(date)));
 			SimpleDateFormat sdfTime = new SimpleDateFormat("kk:mm");

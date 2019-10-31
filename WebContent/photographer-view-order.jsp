@@ -9,7 +9,7 @@
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <%
 	if (session.getAttribute("email") == null) {
-		response.sendRedirect(request.getContextPath() + "/logout.html");
+		response.sendRedirect(request.getContextPath() + "/logout.jsp");
 	}
 %>
 <html>
@@ -72,7 +72,7 @@
 		</div>
 		<br> <br>
 		<%
-			if (order.getStatus().equals(OrderStatus.APPROVED) || order.getStatus().equals(OrderStatus.REJECTED)) {
+			if (!order.getStatus().equals(OrderStatus.APPROVED.name()) && !order.getStatus().equals(OrderStatus.REJECTED.name())) {
 		%>
 		<div class="row">
 			<div class="col-md-6">

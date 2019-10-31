@@ -7,7 +7,7 @@
 <%@ page language="java" import="java.util.*,java.time.*"%>
 <%
 	if (session.getAttribute("email") == null) {
-		response.sendRedirect(request.getContextPath() + "/logout.html");
+		response.sendRedirect(request.getContextPath() + "/logout.jsp");
 	}
 %>
 <html lang="en">

@@ -1,3 +1,4 @@
+<%@page import="com.bmp.utils.AppConstants.OrderStatus"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="java.sql.Date"%>
 <%@page import="com.tables.Order"%>
@@ -8,7 +9,7 @@
 <%@ page language="java" import="java.util.*,java.time.*"%>
 <%
 	if (session.getAttribute("email") == null) {
-		response.sendRedirect(request.getContextPath() + "/logout.html");
+		response.sendRedirect(request.getContextPath() + "/logout.jsp");
 	}
 %>
 <html lang="en">
@@ -78,7 +79,9 @@
 						.getApprovedOrdersByPhotographerId(String.valueOf(photographer.getId()));
 				Map<Date, Long> orderMap = new HashMap<>();
 				for (Order order : orderList) {
-					orderMap.put(order.getDate(), order.getId());
+					if (order.getStatus().equals(OrderStatus.APPROVED.name())) {
+						orderMap.put(order.getDate(), order.getId());
+					}
 				}
 				LocalDate initial = LocalDate.now();
 				if (isNextMonth) {

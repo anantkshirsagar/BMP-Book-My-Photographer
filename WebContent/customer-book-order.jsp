@@ -28,7 +28,7 @@
 <body ng-app="">
 	<div class="jumbotron">
 		<div class="container">
-			<form action="CustomerBookOrder" method="post">
+			<form action="CustomerBookOrder?date=<%=dateStr%>" method="post">
 				<h3>
 					<b>Order Details</b>
 				</h3>

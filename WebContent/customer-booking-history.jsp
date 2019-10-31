@@ -12,7 +12,7 @@
 <%@ page language="java"%>
 <%
 	if (session.getAttribute("email") == null) {
-		response.sendRedirect(request.getContextPath() + "/logout.html");
+		response.sendRedirect(request.getContextPath() + "/logout.jsp");
 	}
 %>
 <html>
@@ -48,12 +48,13 @@
 						Date todaysDate = new Date();
 						if (CollectionUtils.isNotEmpty(orderList)) {
 							for (Order order : orderList) {
-								if (order.getDate().before(todaysDate)) {
-									if (!order.getStatus().equals(OrderStatus.APPROVED.name())
-											&& !order.getStatus().equals(OrderStatus.REJECTED.name())) {
-										order.setStatus(OrderStatus.CANCELED.name());
-									} else if (order.getStatus().equals(OrderStatus.APPROVED.name())) {
+								System.out.println(order.getStatus());
+								if (order.getDate().before(todaysDate) && !(order.getStatus().equals(OrderStatus.COMPLETED.name())
+										|| order.getStatus().equals(OrderStatus.CANCELED.name()))) {
+									if (order.getStatus().equals(OrderStatus.APPROVED.name())) {
 										order.setStatus(OrderStatus.COMPLETED.name());
+									} else if (!order.getStatus().equals(OrderStatus.REJECTED.name())) {
+										order.setStatus(OrderStatus.CANCELED.name());
 									}
 									adminService.updateOrder(order);
 								}

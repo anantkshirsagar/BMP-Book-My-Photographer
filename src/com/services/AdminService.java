@@ -124,6 +124,7 @@ public class AdminService {
 			order.setTime(resultSet.getTime("order_time"));
 			order.setAddress(resultSet.getString("address"));
 			order.setNote(resultSet.getString("note"));
+			order.setStatus(resultSet.getString("status"));
 			order.setCustomerId(resultSet.getLong("customer_id"));
 			order.setPhotographerId(resultSet.getLong("photographer_id"));
 		}
@@ -211,10 +212,11 @@ public class AdminService {
 	public List<Order> getApprovedOrdersByPhotographerId(String id)
 			throws IOException, ClassNotFoundException, SQLException {
 		connectionSettings.build();
-		String query = "select * from order_request where photographer_id=? and status=?";
+		String query = "select * from order_request where photographer_id=? and status IN(?,?)";
 		PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query);
 		prepareStatement.setString(1, id);
 		prepareStatement.setString(2, "APPROVED");
+		prepareStatement.setString(3, "COMPLETED");
 		ResultSet resultSet = prepareStatement.executeQuery();
 		List<Order> list = new ArrayList<>();
 		while (resultSet.next()) {

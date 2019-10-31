@@ -9,7 +9,7 @@
 <%@ page language="java"%>
 <%
 	if (session.getAttribute("email") == null) {
-		response.sendRedirect(request.getContextPath() + "/logout.html");
+		response.sendRedirect(request.getContextPath() + "/logout.jsp");
 	}
 %>
 <html>
@@ -45,12 +45,15 @@
 							List<Order> orderList = adminService.getOrdersByPhotographerId(String.valueOf(photographer.getId()));
 							Date todaysDate = new Date();
 							for (Order order : orderList) {
-								if (order.getDate().before(todaysDate)) {
-									if (!order.getStatus().equals(OrderStatus.APPROVED.name())
-											&& !order.getStatus().equals(OrderStatus.REJECTED.name())) {
-										order.setStatus(OrderStatus.CANCELED.name());
-									} else if (order.getStatus().equals(OrderStatus.APPROVED.name())) {
+								System.out.println(order);
+								if (order.getDate().before(todaysDate) && !(order.getStatus().equals(OrderStatus.COMPLETED.name())
+										|| order.getStatus().equals(OrderStatus.CANCELED.name()))) {
+									if (order.getStatus().equals(OrderStatus.APPROVED.name())) {
 										order.setStatus(OrderStatus.COMPLETED.name());
+										System.out.println("in first if");
+									} else if (!order.getStatus().equals(OrderStatus.REJECTED.name())) {
+										order.setStatus(OrderStatus.CANCELED.name());
+										System.out.println("in Second if");
 									}
 									adminService.updateOrder(order);
 								}
@@ -69,8 +72,8 @@
 								%> <a class="w3-button w3-black"
 								href="view-feedback.jsp?id=<%=order.getFeedbackId()%>">View
 									Feedback</a> <%
-								 	}
-								 %>
+ 	}
+ %>
 							</td>
 						</tr>
 						<%

@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%
 	if (session.getAttribute("email") == null) {
-		response.sendRedirect(request.getContextPath() + "/logout.html");
+		response.sendRedirect(request.getContextPath() + "/logout.jsp");
 	}
 %>
 <!DOCTYPE html>
