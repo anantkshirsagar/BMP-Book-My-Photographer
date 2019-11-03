@@ -2,6 +2,8 @@ Bugs :
 1. category is not coming
 2. Approved and Rejected list remaining.
 3. All login home page remaining
-
-
-Remaining testing from Book order 
+4. search criteria change.
+5. Password is updateing someware.
+6. Null is not handled in all places while displaying.
+7. Order time is updateing someware
+Remaining testi`ng from Book order 
