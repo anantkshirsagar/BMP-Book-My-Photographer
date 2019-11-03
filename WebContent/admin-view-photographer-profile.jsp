@@ -1,3 +1,4 @@
+<%@page import="com.bmp.utils.AppConstants.PhotographerStatus"%>
 <%@page import="java.util.Base64"%>
 <%@page import="com.model.FileContent"%>
 <%@page import="com.services.AdminService"%>
@@ -97,6 +98,9 @@
 						%>
 					</div>
 					<br>
+					<%
+						if (PhotographerStatus.SUBMITTED.name().equals(photographer.getStatus())) {
+					%>
 					<div class="row">
 						<div class="col-md-6">
 							<button class="w3-button w3-block w3-green"
@@ -107,6 +111,9 @@
 								onclick="updatePhotographer(<%=id%>,'REJECTED')">Reject</button>
 						</div>
 					</div>
+					<%
+						}
+					%>
 				</div>
 			</div>
 		</div>

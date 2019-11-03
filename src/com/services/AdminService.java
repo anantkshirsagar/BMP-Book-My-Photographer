@@ -65,6 +65,7 @@ public class AdminService {
 			photographer.setCity(resultSet.getString("city"));
 			photographer.setCameraType(resultSet.getString("camera_type"));
 			photographer.setCategory(resultSet.getString("category"));
+			photographer.setStatus(resultSet.getString("status"));
 		}
 		connectionSettings.closeConnection();
 		return photographer;
@@ -269,35 +270,28 @@ public class AdminService {
 			throws ClassNotFoundException, SQLException {
 		List<Photographer> photographerList = new ArrayList<>();
 		if (StringUtils.isNotBlank(city) || StringUtils.isNotBlank(category)) {
-			if (StringUtils.isNotBlank(city)) {
-				connectionSettings.build();
-				String query = "select * from photographer where city='" + city.toLowerCase()
-						+ "' and status='APPROVED'";
-				PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query);
-				ResultSet resultSet = prepareStatement.executeQuery();
-				while (resultSet.next()) {
-					Photographer photographer = new Photographer();
-					photographer.setId(resultSet.getLong("id"));
-					photographer.setName(resultSet.getString("name"));
-					photographer.setEmail(resultSet.getString("email"));
-					photographer.setMobileNo(resultSet.getLong("mobile_no"));
-					photographerList.add(photographer);
-				}
+			connectionSettings.build();
+			String query = null;
+			if (StringUtils.isNotBlank(city) && StringUtils.isBlank(category)) {
+				query = "select * from photographer where city='" + city.toLowerCase() + "' and status='APPROVED'";
 			}
-			if (StringUtils.isNotBlank(category)) {
-				connectionSettings.build();
-				String query = "select * from photographer where category='" + category.toLowerCase()
+			if (StringUtils.isNotBlank(category) && StringUtils.isBlank(city)) {
+				query = "select * from photographer where category='" + category.toLowerCase()
 						+ "' and status='APPROVED'";
-				PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query);
-				ResultSet resultSet = prepareStatement.executeQuery();
-				while (resultSet.next()) {
-					Photographer photographer = new Photographer();
-					photographer.setId(resultSet.getLong("id"));
-					photographer.setName(resultSet.getString("name"));
-					photographer.setEmail(resultSet.getString("email"));
-					photographer.setMobileNo(resultSet.getLong("mobile_no"));
-					photographerList.add(photographer);
-				}
+			}
+			if (StringUtils.isNotBlank(category) && StringUtils.isNotBlank(city)) {
+				query = "select * from photographer where category='" + category.toLowerCase() + "' and city='"
+						+ city.toLowerCase() + "' and status='APPROVED'";
+			}
+			PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query);
+			ResultSet resultSet = prepareStatement.executeQuery();
+			while (resultSet.next()) {
+				Photographer photographer = new Photographer();
+				photographer.setId(resultSet.getLong("id"));
+				photographer.setName(resultSet.getString("name"));
+				photographer.setEmail(resultSet.getString("email"));
+				photographer.setMobileNo(resultSet.getLong("mobile_no"));
+				photographerList.add(photographer);
 			}
 		} else {
 			connectionSettings.build();

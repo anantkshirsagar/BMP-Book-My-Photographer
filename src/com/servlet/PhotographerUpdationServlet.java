@@ -13,17 +13,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.bmp.utils.AppConstants.PhotographerStatus;
 import com.bmp.utils.ConnectionUtils;
+import com.bmp.utils.ServletUtils;
 import com.dbmanager.connection.setting.AbstractConnectionSettings;
 import com.file.upload.util.FileUploadUtils;
 import com.model.FileContent;
+import com.oreilly.servlet.MultipartRequest;
 import com.services.AdminService;
 import com.services.LoginService;
+import com.tables.FormFields;
 import com.tables.Photographer;
 
 @MultipartConfig
@@ -31,18 +35,21 @@ public class PhotographerUpdationServlet extends HttpServlet {
 	private static final Logger LOG = LoggerFactory.getLogger(PhotographerUpdationServlet.class);
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			List<FileContent> fileContents = null;
-			fileContents = FileUploadUtils.getMultipleFileContents(request);
+			List<FileItem> fileItems = FileUploadUtils.getFileItems(request);
+			List<FormFields> formFieldContents = ServletUtils.getFormFieldContents(fileItems);
+			String category = ServletUtils.getParameter(formFieldContents, "category");
+
+			List<FileContent> multipartContents = ServletUtils.getMultipartContents(fileItems);
+
 			HttpSession session = request.getSession();
 			String email = (String) session.getAttribute("email");
-			String category = request.getParameter("category");
 			AbstractConnectionSettings connectionSettings = ConnectionUtils.getConnectionSettings();
-
 			Photographer photographer = new LoginService().getPhotographerByEmailId(email);
-			for (FileContent fileContent : fileContents) {
+			for (FileContent fileContent : multipartContents) {
 				if (fileContent.getFileName() == null)
 					continue;
 				connectionSettings.build();

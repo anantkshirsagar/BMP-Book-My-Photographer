@@ -17,10 +17,9 @@ public class ApproveOrRejectPhotographerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			String photographerId = (String) request.getParameter("id");
-			String status = (String) request.getParameter("status");
+			String photographerId = request.getParameter("id");
+			String status = request.getParameter("status");
 			AdminService adminService = new AdminService();
-			System.out.println(status);
 			Photographer photographer = adminService.getPhotographerById(photographerId);
 			photographer.setStatus(status);
 			new AdminService().updatePhotographer(photographer);

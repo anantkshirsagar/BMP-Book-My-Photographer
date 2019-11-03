@@ -26,6 +26,7 @@
 <%
 	String id = request.getParameter("id");
 	Order order = new AdminService().getOrderById(id);
+	System.out.println(order.getNote());
 %>
 <body ng-app="">
 	<div class="container">
@@ -37,26 +38,33 @@
 		<div class="row">
 			<div class="col-md-6">
 				<label>Title</label> <input class="w3-input" type="text"
-					name="title" id="title" value="<%=order.getTitle()%>" disabled>
+					name="title" id="title"
+					value="<%=order.getTitle() != null ? order.getTitle() : ""%>"
+					disabled>
 			</div>
 			<div class="col-md-2">
 				<label>Status</label> <input class="w3-input" type="text"
-					name="status" id="status" value="<%=order.getStatus()%>" disabled>
+					name="status" id="status"
+					value="<%=order.getStatus() != null ? order.getStatus() : ""%>"
+					disabled>
 			</div>
 			<div class="col-md-2">
 				<label>Order Date</label> <input type="date" name="date" id="title"
-					value="<%=order.getDate()%>" disabled>
+					value="<%=order.getDate() != null ? order.getDate() : ""%>"
+					disabled>
 			</div>
 			<div class="col-md-2">
 				<label>Order Time </label><input type="time" name="time" id="title"
-					value="<%=order.getTime()%>" disabled>
+					value="<%=order.getTime() != null ? order.getTime() : ""%>"
+					disabled>
 			</div>
 		</div>
 		<br>
 		<div class="row">
 			<div class="col-md-12">
 				<label>Address</label> <input class="w3-input" type="text"
-					name="address" id="address" value="<%=order.getAddress()%>"
+					name="address" id="address"
+					value="<%=order.getAddress() != null ? order.getAddress() : ""%>"
 					disabled>
 			</div>
 		</div>
@@ -65,7 +73,10 @@
 			<div class="col-md-12">
 				<label>Notes</label>
 				<textarea style="float: left; width: 100%; resize: none;" rows="5"
-					value="<%=order.getNote()%>" disabled>
+					disabled>
+					<%
+						out.print(order.getNote() != null ? order.getNote() : "");
+					%>
 						</textarea>
 			</div>
 		</div>

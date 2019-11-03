@@ -30,7 +30,7 @@
 							Frame</label> <input class="w3-check" type="checkbox" name="cameraType">
 						<label>Crop Frame</label> <br>  --><br> <label>Category(add
 							comma separated multiple categories)</label> <input class="w3-input"
-							type="text" name="category" required> <br> <br>
+							type="text" name="category" id="category" required> <br> <br>
 						<label>Upload Your best photos(Maximum 8)</label> <input
 							type="file" id="files" name="filename" id="uploadBox" multiple
 							accept="image/*" onchange="checkFiles()">
