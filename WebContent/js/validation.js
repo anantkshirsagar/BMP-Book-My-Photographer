@@ -1,6 +1,6 @@
 function checkName() {
 	var name = document.getElementById("name").value;
-	var regex = /^[a-zA-Z]*$/;
+	var regex = /^[a-zA-Z ]*$/;
 	if (!regex.test(name)) {
 		alert("Enter Valid Name.");
 		document.getElementById("name").value = "";

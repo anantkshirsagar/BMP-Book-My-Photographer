@@ -10,7 +10,7 @@
 %>
 <html>
 <head>
-<title>Approval List</title>
+<title>Rejected Photographers</title>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
 	type="text/javascript"></script>
@@ -21,6 +21,7 @@
 <body ng-app="">
 	<div class="jumbotron">
 		<div class="container">
+		<h4><center><b>Rejected Photographer List</b></center></h4>
 			<div class="w3-responsive">
 				<table class="w3-table-all">
 					<thead>

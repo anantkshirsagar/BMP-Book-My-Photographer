@@ -21,7 +21,7 @@
 <div ng-include="'commons/load-libs.html'"></div>
 <div ng-include="'commons/customer-nav-bar.html'"></div>
 <script src="js/commons.js"></script>
-<title>Insert title here</title>
+<title>Customer View Order</title>
 </head>
 <%
 	String id = request.getParameter("id");

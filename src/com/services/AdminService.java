@@ -63,6 +63,7 @@ public class AdminService {
 			photographer.setEmail(resultSet.getString("email"));
 			photographer.setMobileNo(resultSet.getLong("mobile_No"));
 			photographer.setCity(resultSet.getString("city"));
+			photographer.setPassword(resultSet.getString("password"));
 			photographer.setCameraType(resultSet.getString("camera_type"));
 			photographer.setCategory(resultSet.getString("category"));
 			photographer.setStatus(resultSet.getString("status"));
@@ -168,6 +169,23 @@ public class AdminService {
 		return customer;
 	}
 
+	public Customer getCustomerById(String id) throws IOException, ClassNotFoundException, SQLException {
+		connectionSettings.build();
+		String query = "select * from customer where id='" + id + "'";
+		PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query);
+		ResultSet resultSet = prepareStatement.executeQuery();
+		Customer customer = null;
+		if (resultSet.next()) {
+			customer = new Customer();
+			customer.setId(resultSet.getLong("id"));
+			customer.setName(resultSet.getString("name"));
+			customer.setEmail(resultSet.getString("email"));
+			customer.setMobileNo(resultSet.getLong("mobile_No"));
+		}
+		connectionSettings.closeConnection();
+		return customer;
+	}
+
 	public List<Order> getOrdersByCustomerId(String id) throws IOException, ClassNotFoundException, SQLException {
 		connectionSettings.build();
 		String query = "select * from order_request where customer_id=" + id;
@@ -179,6 +197,9 @@ public class AdminService {
 			order.setId(resultSet.getLong("id"));
 			order.setTitle(resultSet.getString("title"));
 			order.setDate(resultSet.getDate("order_date"));
+			order.setTime(resultSet.getTime("order_time"));
+			order.setAddress(resultSet.getString("address"));
+			order.setNote(resultSet.getString("note"));
 			order.setStatus(resultSet.getString("status"));
 			order.setFeedbackId(resultSet.getLong("feedback_id"));
 			order.setPhotographerId(resultSet.getLong("photographer_id"));
@@ -201,8 +222,13 @@ public class AdminService {
 			order.setId(resultSet.getLong("id"));
 			order.setTitle(resultSet.getString("title"));
 			order.setDate(resultSet.getDate("order_date"));
+			order.setTime(resultSet.getTime("order_time"));
+			order.setAddress(resultSet.getString("address"));
+			order.setNote(resultSet.getString("note"));
 			order.setStatus(resultSet.getString("status"));
 			order.setFeedbackId(resultSet.getLong("feedback_id"));
+			order.setPhotographerId(resultSet.getLong("photographer_id"));
+			order.setCustomerId(resultSet.getLong("customer_id"));
 			list.add(order);
 		}
 		connectionSettings.closeConnection();
@@ -235,7 +261,7 @@ public class AdminService {
 
 	public void updatePhotographer(Photographer photographer) throws SQLException, ClassNotFoundException {
 		connectionSettings.build();
-		String update = "update photographer set name=?,email=?,password=?,mobile_no=?,status=?,category=? where email =?";
+		String update = "update photographer set name=?,email=?,password=?,mobile_no=?,status=?,category=?,city=? where email =?";
 		PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(update);
 		prepareStatement.setString(1, photographer.getName());
 		prepareStatement.setString(2, photographer.getEmail());
@@ -243,7 +269,8 @@ public class AdminService {
 		prepareStatement.setLong(4, photographer.getMobileNo());
 		prepareStatement.setString(5, photographer.getStatus());
 		prepareStatement.setString(6, photographer.getCategory());
-		prepareStatement.setString(7, photographer.getEmail());
+		prepareStatement.setString(7, photographer.getCity());
+		prepareStatement.setString(8, photographer.getEmail());
 		prepareStatement.executeUpdate();
 		connectionSettings.closeConnection();
 	}
@@ -326,8 +353,7 @@ public class AdminService {
 		return id;
 	}
 
-	@Deprecated
-	public boolean isAnyOrderFind(LocalDate date) throws SQLException, ClassNotFoundException {
+	public Order isAnyOrderFindByDate(LocalDate date) throws SQLException, ClassNotFoundException {
 		DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		date.format(df);
 		connectionSettings.build();
@@ -335,10 +361,20 @@ public class AdminService {
 		PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query);
 		prepareStatement.setDate(1, java.sql.Date.valueOf(date));
 		ResultSet resultSet = prepareStatement.executeQuery();
-		if (!resultSet.next()) {
-			return true;
+		Order order = null;
+		if (resultSet.next()) {
+			order = new Order();
+			order.setId(resultSet.getLong("id"));
+			order.setTitle(resultSet.getString("title"));
+			order.setDate(resultSet.getDate("order_date"));
+			order.setTime(resultSet.getTime("order_time"));
+			order.setAddress(resultSet.getString("address"));
+			order.setNote(resultSet.getString("note"));
+			order.setStatus(resultSet.getString("status"));
+			order.setCustomerId(resultSet.getLong("customer_id"));
+			order.setPhotographerId(resultSet.getLong("photographer_id"));
 		}
 		connectionSettings.closeConnection();
-		return false;
+		return order;
 	}
 }

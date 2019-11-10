@@ -46,6 +46,7 @@ public class LoginServlet extends HttpServlet {
 						out.println(
 								"<center><h2 style=color:red> Your Application is not verified yet !!</h2></center>");
 						out.println("<center>Please try again after some time.</center>");
+						out.println("<br><center><a href=login.html>Click here to go to Login page.</a></center>");
 					} else {
 						forwordPageURL = "temp-photorapher-home.jsp";
 					}

@@ -22,7 +22,7 @@
 <div ng-include="'commons/load-libs.html'"></div>
 <div ng-include="'commons/photographer-nav-bar.html'"></div>
 <script src="js/commons.js"></script>
-<title>Insert title here</title>
+<title>View Order</title>
 </head>
 <%
 	String id = request.getParameter("id");
@@ -62,11 +62,14 @@
 			</div>
 		</div>
 		<br>
-		<div class="row">
+			<div class="row">
 			<div class="col-md-12">
 				<label>Notes</label>
 				<textarea style="float: left; width: 100%; resize: none;" rows="5"
-					value="<%=order.getNote()%>" disabled>
+					disabled>
+					<%
+						out.print(order.getNote() != null ? order.getNote() : "");
+					%>
 						</textarea>
 			</div>
 		</div>

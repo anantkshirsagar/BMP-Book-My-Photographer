@@ -17,7 +17,7 @@
 <script src="lib/angjs.js"></script>
 <div ng-include="'commons/load-libs.html'"></div>
 <div ng-include="'commons/customer-nav-bar.html'"></div>
-<title>Insert title here</title>
+<title>Search Photographer</title>
 </head>
 <body ng-app="">
 	<div class="container">

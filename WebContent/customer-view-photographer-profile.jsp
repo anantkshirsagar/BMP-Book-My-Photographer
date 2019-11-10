@@ -20,7 +20,7 @@
 <div ng-include="'commons/load-libs.html'"></div>
 <div ng-include="'commons/admin-nav-bar.html'"></div>
 <script src="js/commons.js"></script>
-<title>Insert title here</title>
+<title>View Profile</title>
 </head>
 <%
 	String id = request.getParameter("id");

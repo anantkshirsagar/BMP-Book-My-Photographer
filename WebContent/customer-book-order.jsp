@@ -16,7 +16,7 @@
 <script src="lib/angjs.js"></script>
 <div ng-include="'commons/load-libs.html'"></div>
 <div ng-include="'commons/customer-nav-bar.html'"></div>
-<title>Insert title here</title>
+<title>Book Order</title>
 </head>
 <%
 	String photographerId = request.getParameter("id");

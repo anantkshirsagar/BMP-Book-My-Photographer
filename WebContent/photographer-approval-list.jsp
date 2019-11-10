@@ -21,6 +21,7 @@
 <body ng-app="">
 	<div class="jumbotron">
 		<div class="container">
+			<h4><center><b>Pending Approval List</b></center></h4>
 			<div class="w3-responsive">
 				<table class="w3-table-all">
 					<thead>

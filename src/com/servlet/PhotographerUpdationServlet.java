@@ -24,7 +24,6 @@ import com.bmp.utils.ServletUtils;
 import com.dbmanager.connection.setting.AbstractConnectionSettings;
 import com.file.upload.util.FileUploadUtils;
 import com.model.FileContent;
-import com.oreilly.servlet.MultipartRequest;
 import com.services.AdminService;
 import com.services.LoginService;
 import com.tables.FormFields;
@@ -42,7 +41,7 @@ public class PhotographerUpdationServlet extends HttpServlet {
 			List<FileItem> fileItems = FileUploadUtils.getFileItems(request);
 			List<FormFields> formFieldContents = ServletUtils.getFormFieldContents(fileItems);
 			String category = ServletUtils.getParameter(formFieldContents, "category");
-
+			String city = ServletUtils.getParameter(formFieldContents, "city");
 			List<FileContent> multipartContents = ServletUtils.getMultipartContents(fileItems);
 
 			HttpSession session = request.getSession();
@@ -62,12 +61,16 @@ public class PhotographerUpdationServlet extends HttpServlet {
 				connectionSettings.closeConnection();
 			}
 			photographer.setCategory(category);
+			photographer.setCity(city);
 			photographer.setStatus(PhotographerStatus.SUBMITTED.name());
 			new AdminService().updatePhotographer(photographer);
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html");
 			out.println("<center><h2 style=color:red> Application Submitted for verification !!</h2></center>");
 			out.println("<center>Your application will be verified within 3 to 4 working days.</center>");
+			out.println("<br><center><a href=login.html>Click here to go to Login page.</a></center>");
+			session.removeAttribute("email");
+			session.invalidate();
 		} catch (FileUploadException e) {
 			LOG.error(e.toString());
 		} catch (SQLException e) {
