@@ -29,12 +29,14 @@ public class CustomerBookOrder extends HttpServlet {
 			LoginService loginService = new LoginService();
 			Customer customer = loginService.getCustomerByEmailId(email);
 			String time = request.getParameter("time");
+			
 			Order order = new Order();
 			order.setTitle(request.getParameter("title"));
 			order.setAddress(request.getParameter("address"));
 			order.setNote(request.getParameter("note"));
 			order.setPhotographerId(Long.valueOf(photographerId));
 			order.setCustomerId(customer.getId());
+			
 			String date = request.getParameter("date");
 			System.out.println(date);
 			SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");

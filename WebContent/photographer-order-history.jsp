@@ -45,7 +45,7 @@
 							List<Order> orderList = adminService.getOrdersByPhotographerId(String.valueOf(photographer.getId()));
 							Date todaysDate = new Date();
 							for (Order order : orderList) {
-								System.out.println(order);
+								System.out.println(order.getStatus());
 								if (order.getDate().before(todaysDate) && !(order.getStatus().equals(OrderStatus.COMPLETED.name())
 										|| order.getStatus().equals(OrderStatus.CANCELED.name()))) {
 									if (order.getStatus().equals(OrderStatus.APPROVED.name())) {
@@ -55,7 +55,7 @@
 										order.setStatus(OrderStatus.CANCELED.name());
 										System.out.println("in Second if");
 									}
-									adminService.updateOrder(order);
+									//adminService.updateOrder(order);
 								}
 						%>
 						<tr>

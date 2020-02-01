@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>book-my-photographer</display-name>
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>login.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
 		<welcome-file>default.html</welcome-file>
@@ -54,7 +54,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ImageServlet</servlet-name>
-		<servlet-class>test.ImageServlet</servlet-class>
+		<servlet-class>com.servlet.ImageServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ImageServlet</servlet-name>

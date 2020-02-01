@@ -13,8 +13,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.bmp.utils.ConnectionUtils;
-import com.dbmanager.connection.setting.AbstractConnectionSettings;
 import com.model.FileContent;
 import com.mysql.jdbc.Statement;
 import com.tables.Customer;
@@ -22,13 +20,8 @@ import com.tables.Feedback;
 import com.tables.Order;
 import com.tables.Photographer;
 
-public class AdminService {
+public class AdminService extends AbstractDBService {
 	private static final Logger LOG = LoggerFactory.getLogger(AdminService.class);
-	private AbstractConnectionSettings connectionSettings;
-
-	public AdminService() throws IOException {
-		connectionSettings = ConnectionUtils.getConnectionSettings();
-	}
 
 	public List<Photographer> getPhotographerListByStatus(String status)
 			throws IOException, ClassNotFoundException, SQLException {
@@ -239,9 +232,9 @@ public class AdminService {
 	public List<Order> getApprovedOrdersByPhotographerId(String id)
 			throws IOException, ClassNotFoundException, SQLException {
 		connectionSettings.build();
-		String query = "select * from order_request where photographer_id=? and status IN(?,?)";
+		String query = "select * from order_request where photographer_id=? and status=? or status=?";
 		PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query);
-		prepareStatement.setString(1, id);
+		prepareStatement.setLong(1, Long.parseLong(id));
 		prepareStatement.setString(2, "APPROVED");
 		prepareStatement.setString(3, "COMPLETED");
 		ResultSet resultSet = prepareStatement.executeQuery();

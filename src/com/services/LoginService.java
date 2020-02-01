@@ -4,22 +4,18 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.bmp.utils.ConnectionUtils;
-import com.dbmanager.connection.setting.AbstractConnectionSettings;
+import com.bmp.utils.AppConstants.PhotographerStatus;
+import com.model.FileContent;
 import com.tables.Customer;
 import com.tables.Photographer;
 
-public class LoginService {
+public class LoginService extends AbstractDBService {
 	private static final Logger LOG = LoggerFactory.getLogger(LoginService.class);
-	private AbstractConnectionSettings connectionSettings;
-
-	public LoginService() throws IOException {
-		connectionSettings = ConnectionUtils.getConnectionSettings();
-	}
 
 	public boolean isCustomerLoginAllow(String email, String password)
 			throws IOException, ClassNotFoundException, SQLException {
@@ -94,5 +90,26 @@ public class LoginService {
 		}
 		connectionSettings.closeConnection();
 		return customer;
+	}
+
+	public void addPhoto(List<FileContent> multipartContents, Photographer photographer, String category, String city)
+			throws ClassNotFoundException, SQLException {
+		for (FileContent fileContent : multipartContents) {
+			if (fileContent.getFileName() == null) {
+				continue;
+			}
+			connectionSettings.build();
+			String query = "insert into photo(photo_name,photo,photographer_id) values (?,?,?)";
+			PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query);
+			prepareStatement.setString(1, fileContent.getFileName());
+			prepareStatement.setBytes(2, fileContent.getBytes());
+			prepareStatement.setLong(3, photographer.getId());
+			prepareStatement.executeUpdate();
+			connectionSettings.closeConnection();
+		}
+		photographer.setCategory(category);
+		photographer.setCity(city);
+		photographer.setStatus(PhotographerStatus.SUBMITTED.name());
+		new AdminService().updatePhotographer(photographer);
 	}
 }

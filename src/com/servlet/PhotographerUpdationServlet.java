@@ -2,7 +2,6 @@ package com.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,13 +17,9 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.bmp.utils.AppConstants.PhotographerStatus;
-import com.bmp.utils.ConnectionUtils;
 import com.bmp.utils.ServletUtils;
-import com.dbmanager.connection.setting.AbstractConnectionSettings;
 import com.file.upload.util.FileUploadUtils;
 import com.model.FileContent;
-import com.services.AdminService;
 import com.services.LoginService;
 import com.tables.FormFields;
 import com.tables.Photographer;
@@ -46,24 +41,10 @@ public class PhotographerUpdationServlet extends HttpServlet {
 
 			HttpSession session = request.getSession();
 			String email = (String) session.getAttribute("email");
-			AbstractConnectionSettings connectionSettings = ConnectionUtils.getConnectionSettings();
-			Photographer photographer = new LoginService().getPhotographerByEmailId(email);
-			for (FileContent fileContent : multipartContents) {
-				if (fileContent.getFileName() == null)
-					continue;
-				connectionSettings.build();
-				String query = "insert into photo(photo_name,photo,photographer_id) values (?,?,?)";
-				PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query);
-				prepareStatement.setString(1, fileContent.getFileName());
-				prepareStatement.setBytes(2, fileContent.getBytes());
-				prepareStatement.setLong(3, photographer.getId());
-				prepareStatement.executeUpdate();
-				connectionSettings.closeConnection();
-			}
-			photographer.setCategory(category);
-			photographer.setCity(city);
-			photographer.setStatus(PhotographerStatus.SUBMITTED.name());
-			new AdminService().updatePhotographer(photographer);
+			LoginService loginService = new LoginService();
+			Photographer photographer = loginService.getPhotographerByEmailId(email);
+			loginService.addPhoto(multipartContents, photographer, category, city);
+
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html");
 			out.println("<center><h2 style=color:red> Application Submitted for verification !!</h2></center>");

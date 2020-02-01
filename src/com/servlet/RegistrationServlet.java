@@ -50,4 +50,10 @@ public class RegistrationServlet extends HttpServlet {
 		}
 		response.sendRedirect(request.getContextPath() + "/login.html");
 	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
 }

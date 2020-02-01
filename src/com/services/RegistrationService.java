@@ -1,26 +1,18 @@
 package com.services;
 
-import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.bmp.utils.ConnectionUtils;
-import com.dbmanager.connection.setting.AbstractConnectionSettings;
 import com.tables.Customer;
 import com.tables.Order;
 import com.tables.Photographer;
 
-public class RegistrationService {
+public class RegistrationService extends AbstractDBService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(RegistrationService.class);
-	private AbstractConnectionSettings connectionSettings;
-
-	public RegistrationService() throws IOException {
-		connectionSettings = ConnectionUtils.getConnectionSettings();
-	}
 
 	public void insertPhotographer(Photographer photographer) throws ClassNotFoundException, SQLException {
 		connectionSettings.build();
@@ -61,8 +53,8 @@ public class RegistrationService {
 		prepareStatement.setLong(6, order.getCustomerId());
 		prepareStatement.setLong(7, order.getPhotographerId());
 		prepareStatement.setString(8, order.getStatus());
+		LOG.debug("Query: {}", prepareStatement);
 		prepareStatement.executeUpdate();
-		LOG.debug("Order inserted");
 		connectionSettings.closeConnection();
 	}
 }
