@@ -1,0 +1,40 @@
+2020-02-01 19:08:08 DEBUG ConfigurationReader:20 - Loading configurations...
+2020-02-01 19:08:08 DEBUG ConfigurationReader:45 - Checking database and getting properties.
+2020-02-01 19:08:08 DEBUG ConfigurationReader:51 - Postgresql database detected!
+2020-02-01 19:08:08 DEBUG SQLTableManager:26 - Loading tables. Database type PSQL, propertiesPath /home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/psql.properties, configurationMap {email.filter.database.psql=true, email.filter.mysql.properties=/home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/mysql.properties, email.filter.postgres.properties=/home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/psql.properties, email.filter.database.mysql=false}
+2020-02-01 19:08:08 DEBUG SQLTableManager:37 - Tables created successfully
+2020-02-01 19:09:59 DEBUG ConfigurationReader:20 - Loading configurations...
+2020-02-01 19:09:59 DEBUG ConfigurationReader:45 - Checking database and getting properties.
+2020-02-01 19:09:59 DEBUG ConfigurationReader:51 - Postgresql database detected!
+2020-02-01 19:09:59 DEBUG SQLTableManager:26 - Loading tables. Database type PSQL, propertiesPath /home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/psql.properties, configurationMap {email.filter.database.psql=true, email.filter.mysql.properties=/home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/mysql.properties, email.filter.postgres.properties=/home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/psql.properties, email.filter.database.mysql=false}
+2020-02-01 19:09:59 DEBUG SQLTableManager:37 - Tables created successfully
+2020-02-01 19:11:37 DEBUG ConfigurationReader:20 - Loading configurations...
+2020-02-01 19:11:37 DEBUG ConfigurationReader:45 - Checking database and getting properties.
+2020-02-01 19:11:37 DEBUG ConfigurationReader:51 - Postgresql database detected!
+2020-02-01 19:11:37 DEBUG SQLTableManager:26 - Loading tables. Database type PSQL, propertiesPath /home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/psql.properties, configurationMap {email.filter.database.psql=true, email.filter.mysql.properties=/home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/mysql.properties, email.filter.postgres.properties=/home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/psql.properties, email.filter.database.mysql=false}
+2020-02-01 19:11:37 DEBUG SQLTableManager:37 - Tables created successfully
+2020-02-01 19:13:45 DEBUG ConfigurationReader:20 - Loading configurations...
+2020-02-01 19:13:45 DEBUG ConfigurationReader:45 - Checking database and getting properties.
+2020-02-01 19:13:45 DEBUG ConfigurationReader:51 - Postgresql database detected!
+2020-02-01 19:13:45 DEBUG SQLTableManager:26 - Loading tables. Database type PSQL, propertiesPath /home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/psql.properties, configurationMap {email.filter.database.psql=true, email.filter.mysql.properties=/home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/mysql.properties, email.filter.postgres.properties=/home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/psql.properties, email.filter.database.mysql=false}
+2020-02-01 19:13:46 DEBUG SQLTableManager:37 - Tables created successfully
+2020-02-01 19:14:17 DEBUG ConfigurationReader:20 - Loading configurations...
+2020-02-01 19:14:17 DEBUG ConfigurationReader:45 - Checking database and getting properties.
+2020-02-01 19:14:17 DEBUG ConfigurationReader:51 - Postgresql database detected!
+2020-02-01 19:14:17 DEBUG SQLTableManager:26 - Loading tables. Database type PSQL, propertiesPath /home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/psql.properties, configurationMap {email.filter.database.psql=true, email.filter.mysql.properties=/home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/mysql.properties, email.filter.postgres.properties=/home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/psql.properties, email.filter.database.mysql=false}
+2020-02-01 19:14:17 DEBUG SQLTableManager:37 - Tables created successfully
+2020-02-01 20:20:42 DEBUG ConfigurationReader:20 - Loading configurations...
+2020-02-01 20:20:42 DEBUG ConfigurationReader:45 - Checking database and getting properties.
+2020-02-01 20:20:42 DEBUG ConfigurationReader:51 - Postgresql database detected!
+2020-02-01 20:20:42 DEBUG SQLTableManager:26 - Loading tables. Database type PSQL, propertiesPath /home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/psql.properties, configurationMap {email.filter.database.psql=true, email.filter.mysql.properties=/home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/mysql.properties, email.filter.postgres.properties=/home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/psql.properties, email.filter.database.mysql=false}
+2020-02-01 20:20:43 DEBUG SQLTableManager:37 - Tables created successfully
+2020-02-01 20:21:19 DEBUG ConfigurationReader:20 - Loading configurations...
+2020-02-01 20:21:19 DEBUG ConfigurationReader:45 - Checking database and getting properties.
+2020-02-01 20:21:19 DEBUG ConfigurationReader:51 - Postgresql database detected!
+2020-02-01 20:21:19 DEBUG SQLTableManager:26 - Loading tables. Database type PSQL, propertiesPath /home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/psql.properties, configurationMap {email.filter.database.psql=true, email.filter.mysql.properties=/home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/mysql.properties, email.filter.postgres.properties=/home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/psql.properties, email.filter.database.mysql=false}
+2020-02-01 20:21:20 DEBUG SQLTableManager:37 - Tables created successfully
+2020-02-01 20:21:49 DEBUG ConfigurationReader:20 - Loading configurations...
+2020-02-01 20:21:49 DEBUG ConfigurationReader:45 - Checking database and getting properties.
+2020-02-01 20:21:49 DEBUG ConfigurationReader:51 - Postgresql database detected!
+2020-02-01 20:21:49 DEBUG SQLTableManager:26 - Loading tables. Database type PSQL, propertiesPath /home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/psql.properties, configurationMap {email.filter.database.psql=true, email.filter.mysql.properties=/home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/mysql.properties, email.filter.postgres.properties=/home/anant/eclipse-nsg-workspace/BMP-Book-My-Photographer/resources/psql.properties, email.filter.database.mysql=false}
+2020-02-01 20:21:50 DEBUG SQLTableManager:37 - Tables created successfully
