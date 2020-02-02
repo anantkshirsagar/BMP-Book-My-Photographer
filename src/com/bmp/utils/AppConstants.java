@@ -17,8 +17,7 @@ public interface AppConstants {
 
 	String ADMIN_USERNAME = "admin";
 	String ADMIN_PASSWORD = "123456";
-	
-	
+
 	public static final String DATABASE_CONFIG_PATH = "app-configurations.properties";
 	public static final String CREATE_MYSQL_TABLES = "resources" + File.separator + "database" + File.separator
 			+ "mysql_tables.sql";

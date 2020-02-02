@@ -20,7 +20,7 @@ public class CreateTables {
 	 * 
 	 */
 	public static void main(String[] args) throws ClassNotFoundException, IOException, SQLException {
-		SQLTableManager tableManager = new SQLTableManager(AppConstants.DATABASE_TYPE.PSQL);
+		SQLTableManager tableManager = new SQLTableManager(AppConstants.DATABASE_TYPE.MYSQL);
 		tableManager.createTables();
 	}
 }

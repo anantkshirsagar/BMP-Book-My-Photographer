@@ -350,9 +350,10 @@ public class AdminService extends AbstractDBService {
 		DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		date.format(df);
 		connectionSettings.build();
-		String query = "select * from order_request where order_date=?";
+		String query = "select * from order_request where order_date=? and status=?";
 		PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(query);
 		prepareStatement.setDate(1, java.sql.Date.valueOf(date));
+		prepareStatement.setString(2, "Approved");
 		ResultSet resultSet = prepareStatement.executeQuery();
 		Order order = null;
 		if (resultSet.next()) {
