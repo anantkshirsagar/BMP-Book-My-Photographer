@@ -8,6 +8,7 @@
 	if (session.getAttribute("email") == null) {
 		response.sendRedirect(request.getContextPath() + "/logout.jsp");
 	}
+	out.write("Email " + session.getAttribute("email"));
 %>
 <!DOCTYPE html>
 <html>

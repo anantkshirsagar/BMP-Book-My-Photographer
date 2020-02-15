@@ -6,15 +6,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Logout</title>
 </head>
-<%
-	session.invalidate();
-%>
-<body>
+<body onload="logout()">
 	<center>
 		<h2 style="color: red">You are logout from system!!</h2>
 	</center>
 	<center>
 		<a href=login.html>Click here to go to Login page.</a>
 	</center>
+	<script type="text/javascript">
+		function logout() {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+				}
+			};
+			xhr.open('POST', "LogoutServlet", true);
+			xhr.send();
+		}
+	</script>
 </body>
 </html>
