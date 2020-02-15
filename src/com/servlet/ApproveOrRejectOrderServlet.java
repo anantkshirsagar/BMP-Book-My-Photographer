@@ -22,7 +22,7 @@ public class ApproveOrRejectOrderServlet extends HttpServlet {
 			AdminService adminService = new AdminService();
 			Order order = adminService.getOrderById(orderId);
 			order.setStatus(status);
-			new AdminService().updateOrder(order);
+			new AdminService().updateOrderWithoutFeedback(order);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}

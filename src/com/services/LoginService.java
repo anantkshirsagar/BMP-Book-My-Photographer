@@ -107,8 +107,8 @@ public class LoginService extends AbstractDBService {
 			prepareStatement.executeUpdate();
 			connectionSettings.closeConnection();
 		}
-		photographer.setCategory(category);
-		photographer.setCity(city);
+		photographer.setCategory(category.toLowerCase());
+		photographer.setCity(city.toLowerCase());
 		photographer.setStatus(PhotographerStatus.SUBMITTED.name());
 		new AdminService().updatePhotographer(photographer);
 	}

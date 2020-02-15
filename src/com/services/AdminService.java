@@ -282,6 +282,25 @@ public class AdminService extends AbstractDBService {
 		prepareStatement.setLong(8, order.getFeedbackId());
 		prepareStatement.setString(9, order.getStatus());
 		prepareStatement.setLong(10, order.getId());
+		LOG.debug("Query {}", prepareStatement);
+		prepareStatement.executeUpdate();
+		connectionSettings.closeConnection();
+	}
+
+	public void updateOrderWithoutFeedback(Order order) throws SQLException, ClassNotFoundException {
+		connectionSettings.build();
+		String update = "update order_request set title=?,order_date=?,order_time=?,address=?,note=?,customer_id=?,photographer_id=?,status=? where id =?";
+		PreparedStatement prepareStatement = connectionSettings.getConnection().prepareStatement(update);
+		prepareStatement.setString(1, order.getTitle());
+		prepareStatement.setDate(2, order.getDate());
+		prepareStatement.setTime(3, order.getTime());
+		prepareStatement.setString(4, order.getAddress());
+		prepareStatement.setString(5, order.getNote());
+		prepareStatement.setLong(6, order.getCustomerId());
+		prepareStatement.setLong(7, order.getPhotographerId());
+		prepareStatement.setString(8, order.getStatus());
+		prepareStatement.setLong(9, order.getId());
+		LOG.debug("Query {}", prepareStatement);
 		prepareStatement.executeUpdate();
 		connectionSettings.closeConnection();
 	}
